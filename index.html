@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio IA - Développeur Full-Stack</title>
+    <title>AI Portfolio - Full-Stack Developer</title>
+    <meta name="description" content="Full-Stack Developer specialized in AI - React, Python, Machine Learning">
     <style>
         * {
             margin: 0;
@@ -26,19 +27,63 @@
         header {
             text-align: center;
             margin-bottom: 60px;
-            color: white;
+            padding: 40px 20px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
         }
 
         h1 {
             font-size: 3rem;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
         }
 
         .tagline {
+            color: #4a5568;
             font-size: 1.3rem;
-            opacity: 0.95;
+            margin-bottom: 25px;
+        }
+
+        .header-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
             margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .github-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: #24292e;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .github-btn:hover {
+            background: #1a1e22;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(36, 41, 46, 0.3);
+        }
+
+        .source-note {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #e0f2fe, #dbeafe);
+            color: #1e40af;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 500;
         }
 
         .tech-stack {
@@ -50,12 +95,12 @@
         }
 
         .tech-badge {
-            background: rgba(255,255,255,0.2);
-            backdrop-filter: blur(10px);
+            background: linear-gradient(135deg, #e0f2fe, #f3e8ff);
+            color: #5b21b6;
             padding: 8px 16px;
             border-radius: 20px;
             font-size: 0.9rem;
-            border: 1px solid rgba(255,255,255,0.3);
+            font-weight: 600;
         }
 
         .projects {
@@ -161,23 +206,6 @@
             font-weight: 600;
         }
 
-        .github-link {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 12px 24px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            text-decoration: none;
-            border-radius: 10px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .github-link:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
-        }
-
         .contact {
             background: white;
             border-radius: 20px;
@@ -213,6 +241,9 @@
             border-radius: 10px;
             font-weight: 600;
             transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .contact-btn:hover {
@@ -242,8 +273,21 @@
 <body>
     <div class="container">
         <header>
-            <h1>🚀 Portfolio IA & Full-Stack</h1>
-            <p class="tagline">Développeur Full-Stack spécialisé en Intelligence Artificielle</p>
+            <h1>🚀 AI & Full-Stack Portfolio</h1>
+            <p class="tagline">Full-Stack Developer specialized in Artificial Intelligence</p>
+
+            <div class="header-buttons">
+                <a href="https://github.com/YOUR-USERNAME/portfolio-ia" class="github-btn" target="_blank">
+                    <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor">
+                        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+                    </svg>
+                    View Source Code
+                </a>
+                <span class="source-note">
+                    💻 All project code available on GitHub
+                </span>
+            </div>
+
             <div class="tech-stack">
                 <span class="tech-badge">React 19</span>
                 <span class="tech-badge">Next.js 15</span>
@@ -261,18 +305,18 @@
             <div class="project">
                 <div class="project-number">1</div>
                 <h3 class="project-title">Newsletter App</h3>
-                <p class="project-subtitle">Magazine Numérique Automatisé par IA</p>
+                <p class="project-subtitle">AI-Powered Digital Magazine</p>
                 <p class="project-description">
-                    Application web full-stack qui transforme automatiquement vos emails en magazine numérique élégant.
-                    Utilise l'IA pour catégoriser, résumer et mettre en forme le contenu de manière intelligente.
+                    Full-stack web application that automatically transforms your emails into an elegant digital magazine.
+                    Uses AI to intelligently categorize, summarize, and format content.
                 </p>
                 <div class="features">
-                    <h4>Fonctionnalités clés :</h4>
+                    <h4>Key Features:</h4>
                     <ul>
-                        <li>Traitement automatique des emails</li>
-                        <li>Catégorisation IA intelligente</li>
-                        <li>Interface magazine moderne (React 19)</li>
-                        <li>API REST complète (FastAPI)</li>
+                        <li>Automatic email processing</li>
+                        <li>Intelligent AI categorization</li>
+                        <li>Modern magazine interface (React 19)</li>
+                        <li>Complete REST API (FastAPI)</li>
                     </ul>
                 </div>
                 <div class="tech-tags">
@@ -288,18 +332,18 @@
             <div class="project">
                 <div class="project-number">2</div>
                 <h3 class="project-title">Veo3 Analyzer</h3>
-                <p class="project-subtitle">Optimisation ML de Prompts Vidéo</p>
+                <p class="project-subtitle">ML-Powered Video Prompt Optimization</p>
                 <p class="project-description">
-                    Système de Machine Learning pour optimiser les prompts Veo3 (générateur vidéo IA de Google).
-                    Utilise la détection de patterns et des algorithmes ML pour recommander les meilleurs prompts.
+                    Machine Learning system to optimize prompts for Veo3 (Google's AI video generator).
+                    Uses pattern detection and ML algorithms to recommend the best prompts.
                 </p>
                 <div class="features">
-                    <h4>Fonctionnalités clés :</h4>
+                    <h4>Key Features:</h4>
                     <ul>
-                        <li>Détection automatique de patterns</li>
-                        <li>Algorithme de scoring ML</li>
-                        <li>Recommandations intelligentes</li>
-                        <li>Interface web Flask moderne</li>
+                        <li>Automatic pattern detection</li>
+                        <li>ML scoring algorithm</li>
+                        <li>Intelligent recommendations</li>
+                        <li>Modern Flask web interface</li>
                     </ul>
                 </div>
                 <div class="tech-tags">
@@ -315,18 +359,18 @@
             <div class="project">
                 <div class="project-number">3</div>
                 <h3 class="project-title">🎵 Media MCP</h3>
-                <p class="project-subtitle">Contrôle Vocal YouTube & Spotify via IA</p>
+                <p class="project-subtitle">Voice-Controlled YouTube & Spotify via AI</p>
                 <p class="project-description">
-                    Serveurs MCP innovants permettant de contrôler YouTube et Spotify directement depuis Claude Desktop
-                    en langage naturel. "Joue du jazz sur Spotify" ou "trouve une vidéo sur React" - c'est fait !
+                    Innovative MCP servers enabling YouTube and Spotify control directly from Claude Desktop
+                    in natural language. "Play jazz on Spotify" or "find a video about React" - done!
                 </p>
                 <div class="features">
-                    <h4>Fonctionnalités clés :</h4>
+                    <h4>Key Features:</h4>
                     <ul>
-                        <li>Contrôle conversationnel de YouTube</li>
-                        <li>Gestion Spotify en langage naturel</li>
-                        <li>Intégration Claude Desktop (MCP Protocol)</li>
-                        <li>API YouTube & Spotify complètes</li>
+                        <li>Conversational YouTube control</li>
+                        <li>Natural language Spotify management</li>
+                        <li>Claude Desktop integration (MCP Protocol)</li>
+                        <li>Complete YouTube & Spotify APIs</li>
                     </ul>
                 </div>
                 <div class="tech-tags">
@@ -340,15 +384,21 @@
         </div>
 
         <div class="contact">
-            <h2>💼 Prêt à collaborer</h2>
+            <h2>💼 Let's Work Together</h2>
             <p class="contact-info">
-                Passionné par l'IA et le développement web moderne, je crée des solutions intelligentes
-                qui combinent technologies de pointe et design soigné.
+                Passionate about AI and modern web development, I create intelligent solutions
+                that combine cutting-edge technologies with thoughtful design.
             </p>
             <div class="contact-links">
-                <a href="mailto:votre.email@example.com" class="contact-btn">📧 Me contacter</a>
-                <a href="https://github.com/votre-username" class="contact-btn" target="_blank">💻 GitHub</a>
-                <a href="https://linkedin.com/in/votre-profile" class="contact-btn" target="_blank">💼 LinkedIn</a>
+                <a href="mailto:your.email@example.com" class="contact-btn">
+                    📧 Contact Me
+                </a>
+                <a href="https://github.com/YOUR-USERNAME" class="contact-btn" target="_blank">
+                    💻 GitHub Profile
+                </a>
+                <a href="https://linkedin.com/in/YOUR-PROFILE" class="contact-btn" target="_blank">
+                    💼 LinkedIn
+                </a>
             </div>
         </div>
     </div>
