@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio IA - Développeur Full-Stack</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+            color: white;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .tagline {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            margin-bottom: 30px;
+        }
+
+        .tech-stack {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .tech-badge {
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .project {
+            background: white;
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 60px rgba(0,0,0,0.25);
+        }
+
+        .project-number {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        .project-title {
+            font-size: 1.8rem;
+            color: #2d3748;
+            margin-bottom: 15px;
+            padding-right: 60px;
+        }
+
+        .project-subtitle {
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .project-description {
+            color: #4a5568;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .features {
+            margin: 20px 0;
+        }
+
+        .features h4 {
+            color: #2d3748;
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+
+        .features ul {
+            list-style: none;
+            color: #4a5568;
+        }
+
+        .features li {
+            padding: 5px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .features li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #48bb78;
+            font-weight: bold;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 20px;
+        }
+
+        .tech-tag {
+            background: linear-gradient(135deg, #e0e7ff, #f3e8ff);
+            color: #5b21b6;
+            padding: 6px 14px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .github-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .github-link:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .contact {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+        }
+
+        .contact h2 {
+            color: #2d3748;
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+
+        .contact-info {
+            color: #4a5568;
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .contact-btn {
+            padding: 14px 30px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .tagline {
+                font-size: 1.1rem;
+            }
+
+            .projects {
+                grid-template-columns: 1fr;
+            }
+
+            .project-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚀 Portfolio IA & Full-Stack</h1>
+            <p class="tagline">Développeur Full-Stack spécialisé en Intelligence Artificielle</p>
+            <div class="tech-stack">
+                <span class="tech-badge">React 19</span>
+                <span class="tech-badge">Next.js 15</span>
+                <span class="tech-badge">Python</span>
+                <span class="tech-badge">FastAPI</span>
+                <span class="tech-badge">Claude AI</span>
+                <span class="tech-badge">PostgreSQL</span>
+                <span class="tech-badge">Machine Learning</span>
+                <span class="tech-badge">MCP Protocol</span>
+            </div>
+        </header>
+
+        <div class="projects">
+            <!-- Newsletter App -->
+            <div class="project">
+                <div class="project-number">1</div>
+                <h3 class="project-title">Newsletter App</h3>
+                <p class="project-subtitle">Magazine Numérique Automatisé par IA</p>
+                <p class="project-description">
+                    Application web full-stack qui transforme automatiquement vos emails en magazine numérique élégant.
+                    Utilise l'IA pour catégoriser, résumer et mettre en forme le contenu de manière intelligente.
+                </p>
+                <div class="features">
+                    <h4>Fonctionnalités clés :</h4>
+                    <ul>
+                        <li>Traitement automatique des emails</li>
+                        <li>Catégorisation IA intelligente</li>
+                        <li>Interface magazine moderne (React 19)</li>
+                        <li>API REST complète (FastAPI)</li>
+                    </ul>
+                </div>
+                <div class="tech-tags">
+                    <span class="tech-tag">React 19</span>
+                    <span class="tech-tag">FastAPI</span>
+                    <span class="tech-tag">Claude AI</span>
+                    <span class="tech-tag">SQLite</span>
+                    <span class="tech-tag">REST API</span>
+                </div>
+            </div>
+
+            <!-- Veo3 Analyzer -->
+            <div class="project">
+                <div class="project-number">2</div>
+                <h3 class="project-title">Veo3 Analyzer</h3>
+                <p class="project-subtitle">Optimisation ML de Prompts Vidéo</p>
+                <p class="project-description">
+                    Système de Machine Learning pour optimiser les prompts Veo3 (générateur vidéo IA de Google).
+                    Utilise la détection de patterns et des algorithmes ML pour recommander les meilleurs prompts.
+                </p>
+                <div class="features">
+                    <h4>Fonctionnalités clés :</h4>
+                    <ul>
+                        <li>Détection automatique de patterns</li>
+                        <li>Algorithme de scoring ML</li>
+                        <li>Recommandations intelligentes</li>
+                        <li>Interface web Flask moderne</li>
+                    </ul>
+                </div>
+                <div class="tech-tags">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Flask</span>
+                    <span class="tech-tag">Machine Learning</span>
+                    <span class="tech-tag">Pattern Detection</span>
+                    <span class="tech-tag">NLP</span>
+                </div>
+            </div>
+
+            <!-- Media MCP -->
+            <div class="project">
+                <div class="project-number">3</div>
+                <h3 class="project-title">🎵 Media MCP</h3>
+                <p class="project-subtitle">Contrôle Vocal YouTube & Spotify via IA</p>
+                <p class="project-description">
+                    Serveurs MCP innovants permettant de contrôler YouTube et Spotify directement depuis Claude Desktop
+                    en langage naturel. "Joue du jazz sur Spotify" ou "trouve une vidéo sur React" - c'est fait !
+                </p>
+                <div class="features">
+                    <h4>Fonctionnalités clés :</h4>
+                    <ul>
+                        <li>Contrôle conversationnel de YouTube</li>
+                        <li>Gestion Spotify en langage naturel</li>
+                        <li>Intégration Claude Desktop (MCP Protocol)</li>
+                        <li>API YouTube & Spotify complètes</li>
+                    </ul>
+                </div>
+                <div class="tech-tags">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">MCP Protocol</span>
+                    <span class="tech-tag">YouTube API</span>
+                    <span class="tech-tag">Spotify API</span>
+                    <span class="tech-tag">Claude Desktop</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="contact">
+            <h2>💼 Prêt à collaborer</h2>
+            <p class="contact-info">
+                Passionné par l'IA et le développement web moderne, je crée des solutions intelligentes
+                qui combinent technologies de pointe et design soigné.
+            </p>
+            <div class="contact-links">
+                <a href="mailto:votre.email@example.com" class="contact-btn">📧 Me contacter</a>
+                <a href="https://github.com/votre-username" class="contact-btn" target="_blank">💻 GitHub</a>
+                <a href="https://linkedin.com/in/votre-profile" class="contact-btn" target="_blank">💼 LinkedIn</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
