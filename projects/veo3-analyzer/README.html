@@ -23,15 +23,21 @@
         .back-btn {
             display: inline-block;
             margin-bottom: 30px;
-            color: #0ea5e9;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #e0f2fe, #dcfce7);
+            color: #0e7490;
             text-decoration: none;
+            border-radius: 10px;
             font-weight: 500;
+            transition: all 0.3s;
         }
+        .back-btn:hover { transform: translateX(-5px); }
         h1 {
             font-size: 2.5rem;
             background: linear-gradient(135deg, #0ea5e9, #10b981);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
         }
         .status {
             display: inline-block;
@@ -39,36 +45,141 @@
             background: #d1fae5;
             color: #065f46;
             border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+        }
+        .section {
+            margin: 40px 0;
+        }
+        .section-title {
+            font-size: 1.5rem;
+            color: #1e293b;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #e0f2fe;
+        }
+        .description {
+            color: #475569;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+        }
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
             margin: 20px 0;
         }
-        p { color: #64748b; line-height: 1.8; margin: 20px 0; }
-        h2 { color: #1e293b; margin: 30px 0 15px 0; }
-        ul { color: #475569; line-height: 2; margin-left: 20px; }
-        code {
-            background: #f1f5f9;
-            padding: 2px 8px;
-            border-radius: 4px;
+        .tech-item {
+            padding: 15px;
+            background: linear-gradient(135deg, #e0f2fe, #dcfce7);
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 600;
+            color: #0e7490;
+            transition: all 0.3s;
+        }
+        .tech-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(14, 165, 233, 0.2);
+        }
+        .feature-list, .todo-list {
+            list-style: none;
+            color: #475569;
+        }
+        .feature-list li, .todo-list li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            line-height: 1.6;
+        }
+        .feature-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #10b981;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        .todo-list li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #0ea5e9;
+            font-weight: bold;
+        }
+        .command-box {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 10px;
             font-family: 'Courier New', monospace;
+            margin: 20px 0;
+            overflow-x: auto;
+            line-height: 1.6;
+        }
+        .command-box code {
+            color: #10b981;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <a href="../index.html" class="back-btn">← Retour</a>
+        <a href="../index.html" class="back-btn">← Retour aux projets</a>
+
         <h1>🎬 Veo3 Prompt Optimizer</h1>
         <span class="status">✓ Terminé</span>
-        <p>Système ML d'optimisation de prompts pour Google Veo3 avec détection de patterns et recommandations intelligentes.</p>
-        <h2>🛠️ Technologies</h2>
-        <p>Python, Flask, ML Pattern Detection, Statistical Analysis</p>
-        <h2>✨ Fonctionnalités</h2>
-        <ul>
-            <li>Analyse 25+ features par prompt</li>
-            <li>Apprend des patterns succès/échec</li>
-            <li>Recommandations intelligentes</li>
-            <li>Dashboard avec insights temps réel</li>
-        </ul>
-        <h2>🚀 Démarrage</h2>
-        <p><code>pip install -r requirements.txt</code><br><code>python app.py</code><br>Ouvrir http://localhost:5000</p>
+
+        <div class="section">
+            <div class="section-title">📋 Description</div>
+            <p class="description">
+                Système ML d'optimisation de prompts pour Google Veo3. Analyse 25+ features, apprend des patterns succès/échec et donne recommandations.
+            </p>
+        </div>
+
+        <div class="section">
+            <div class="section-title">🛠️ Technologies Utilisées</div>
+            <div class="tech-grid">
+                <div class="tech-item">Python</div>
+                <div class="tech-item">Flask</div>
+                <div class="tech-item">ML</div>
+                <div class="tech-item">Pattern Detection</div>
+                <div class="tech-item">Stats Analysis</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">✨ Fonctionnalités</div>
+            <ul class="feature-list">
+                <li>Analyse 25+ features/prompt</li>
+                <li>Apprentissage patterns</li>
+                <li>Recommandations intelligentes</li>
+                <li>Dashboard insights temps réel</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <div class="section-title">🚀 Comment Démarrer</div>
+            <div class="command-box">
+<code>pip install -r requirements.txt</code><br>
+<code>python app.py</code><br>
+<em style="color: #94a3b8;"># http://localhost:5000</em>
+            </div>
+        </div>
+
+        
+
+        <div class="section">
+            <div class="section-title">✅ À Compléter / Améliorer</div>
+            <ul class="todo-list">
+                <li>Support autres modèles vidéo (Pika, Kling)</li>
+                <li>Dashboard analytics amélioré</li>
+                <li>A/B testing prompts</li>
+                <li>API REST</li>
+                <li>Community sharing prompts</li>
+            </ul>
+        </div>
     </div>
 </body>
 </html>

@@ -23,15 +23,21 @@
         .back-btn {
             display: inline-block;
             margin-bottom: 30px;
-            color: #0ea5e9;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #e0f2fe, #dcfce7);
+            color: #0e7490;
             text-decoration: none;
+            border-radius: 10px;
             font-weight: 500;
+            transition: all 0.3s;
         }
+        .back-btn:hover { transform: translateX(-5px); }
         h1 {
             font-size: 2.5rem;
             background: linear-gradient(135deg, #0ea5e9, #10b981);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
         }
         .status {
             display: inline-block;
@@ -39,29 +45,140 @@
             background: #d1fae5;
             color: #065f46;
             border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+        }
+        .section {
+            margin: 40px 0;
+        }
+        .section-title {
+            font-size: 1.5rem;
+            color: #1e293b;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #e0f2fe;
+        }
+        .description {
+            color: #475569;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+        }
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
             margin: 20px 0;
         }
-        p { color: #64748b; line-height: 1.8; margin: 20px 0; }
-        h2 { color: #1e293b; margin: 30px 0 15px 0; }
-        ul { color: #475569; line-height: 2; margin-left: 20px; }
+        .tech-item {
+            padding: 15px;
+            background: linear-gradient(135deg, #e0f2fe, #dcfce7);
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 600;
+            color: #0e7490;
+            transition: all 0.3s;
+        }
+        .tech-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(14, 165, 233, 0.2);
+        }
+        .feature-list, .todo-list {
+            list-style: none;
+            color: #475569;
+        }
+        .feature-list li, .todo-list li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            line-height: 1.6;
+        }
+        .feature-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #10b981;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        .todo-list li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #0ea5e9;
+            font-weight: bold;
+        }
+        .command-box {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            margin: 20px 0;
+            overflow-x: auto;
+            line-height: 1.6;
+        }
+        .command-box code {
+            color: #10b981;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <a href="../index.html" class="back-btn">← Retour</a>
+        <a href="../index.html" class="back-btn">← Retour aux projets</a>
+
         <h1>🎵 Media MCP</h1>
         <span class="status">✓ Terminé</span>
-        <p>Serveurs MCP pour contrôler YouTube et Spotify via Claude Desktop de manière conversationnelle.</p>
-        <h2>🛠️ Technologies</h2>
-        <p>Python, MCP (Model Context Protocol), YouTube API v3, Spotify API</p>
-        <h2>✨ Fonctionnalités</h2>
-        <ul>
-            <li><strong>YouTube:</strong> Gérer Watch Later, organiser playlists, rechercher vidéos</li>
-            <li><strong>Spotify:</strong> Créer playlists par genre, supprimer doublons, analyser habitudes</li>
-            <li>Contrôle conversationnel via Claude Desktop</li>
-        </ul>
-        <h2>🚀 Configuration</h2>
-        <p>1. Installer uvx et serveurs MCP<br>2. Obtenir credentials API YouTube + Spotify<br>3. Configurer Claude Desktop<br>4. Utiliser via conversations naturelles</p>
+
+        <div class="section">
+            <div class="section-title">📋 Description</div>
+            <p class="description">
+                Serveurs MCP pour contrôler YouTube et Spotify via Claude Desktop conversationnellement. Organise playlists, supprime doublons.
+            </p>
+        </div>
+
+        <div class="section">
+            <div class="section-title">🛠️ Technologies Utilisées</div>
+            <div class="tech-grid">
+                <div class="tech-item">Python</div>
+                <div class="tech-item">MCP Protocol</div>
+                <div class="tech-item">YouTube API</div>
+                <div class="tech-item">Spotify API</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">✨ Fonctionnalités</div>
+            <ul class="feature-list">
+                <li>YouTube: Watch Later, playlists</li>
+                <li>Spotify: playlists par genre, doublons</li>
+                <li>Contrôle conversationnel via Claude Desktop</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <div class="section-title">🚀 Comment Démarrer</div>
+            <div class="command-box">
+<code>pip install uvx</code><br>
+<code>uvx install mcp-youtube spotify-mcp</code><br>
+<em style="color: #94a3b8;"># Configurer claude_desktop_config.json</em><br>
+<em style="color: #94a3b8;"># Voir README pour setup complet</em>
+            </div>
+        </div>
+
+        
+
+        <div class="section">
+            <div class="section-title">✅ À Compléter / Améliorer</div>
+            <ul class="todo-list">
+                <li>Support Apple Music</li>
+                <li>Playlists cross-platform sync</li>
+                <li>Lyrics extraction</li>
+                <li>Recommendations engine</li>
+                <li>Web dashboard visualisation</li>
+            </ul>
+        </div>
     </div>
 </body>
 </html>

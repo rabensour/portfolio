@@ -23,11 +23,15 @@
         .back-btn {
             display: inline-block;
             margin-bottom: 30px;
-            color: #0ea5e9;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #e0f2fe, #dcfce7);
+            color: #0e7490;
             text-decoration: none;
+            border-radius: 10px;
             font-weight: 500;
+            transition: all 0.3s;
         }
-        .back-btn:hover { text-decoration: underline; }
+        .back-btn:hover { transform: translateX(-5px); }
         h1 {
             font-size: 2.5rem;
             background: linear-gradient(135deg, #0ea5e9, #10b981);
@@ -43,7 +47,7 @@
             border-radius: 20px;
             font-size: 0.9rem;
             font-weight: 600;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
         }
         .section {
             margin: 40px 0;
@@ -51,14 +55,15 @@
         .section-title {
             font-size: 1.5rem;
             color: #1e293b;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             padding-bottom: 10px;
-            border-bottom: 2px solid #e0f2fe;
+            border-bottom: 3px solid #e0f2fe;
         }
         .description {
             color: #475569;
             line-height: 1.8;
             margin-bottom: 20px;
+            font-size: 1.05rem;
         }
         .tech-grid {
             display: grid;
@@ -71,8 +76,13 @@
             background: linear-gradient(135deg, #e0f2fe, #dcfce7);
             border-radius: 10px;
             text-align: center;
-            font-weight: 500;
+            font-weight: 600;
             color: #0e7490;
+            transition: all 0.3s;
+        }
+        .tech-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(14, 165, 233, 0.2);
         }
         .feature-list, .todo-list {
             list-style: none;
@@ -107,6 +117,7 @@
             font-family: 'Courier New', monospace;
             margin: 20px 0;
             overflow-x: auto;
+            line-height: 1.6;
         }
         .command-box code {
             color: #10b981;
@@ -123,9 +134,7 @@
         <div class="section">
             <div class="section-title">📋 Description</div>
             <p class="description">
-                Application web moderne qui transforme vos emails en un magazine numérique élégant, propulsée par Claude AI.
-                L'IA extrait automatiquement l'essentiel de chaque email et les organise dans une interface inspirée de Flipboard/Medium.
-                Catégorisation intelligente, recherche puissante et filtres avancés pour une expérience de lecture optimale.
+                Application web transformant vos emails en magazine numérique avec Claude AI. Catégorisation automatique et interface moderne style Flipboard/Medium.
             </p>
         </div>
 
@@ -135,7 +144,7 @@
                 <div class="tech-item">React 19</div>
                 <div class="tech-item">Vite</div>
                 <div class="tech-item">TypeScript</div>
-                <div class="tech-item">Tailwind CSS 4</div>
+                <div class="tech-item">Tailwind 4</div>
                 <div class="tech-item">FastAPI</div>
                 <div class="tech-item">Claude AI</div>
                 <div class="tech-item">SQLite</div>
@@ -146,60 +155,38 @@
         <div class="section">
             <div class="section-title">✨ Fonctionnalités</div>
             <ul class="feature-list">
-                <li>Traitement AI automatique - Claude AI extrait l'essentiel</li>
-                <li>Interface magazine moderne (Flipboard/Medium style)</li>
-                <li>Catégorisation intelligente automatique</li>
-                <li>Recherche en temps réel dans tous vos emails</li>
-                <li>Filtres avancés (catégorie, sentiment, action requise)</li>
-                <li>Polling automatique toutes les 30s pour nouveaux emails</li>
-                <li>9 catégories: Work, Personal, Newsletter, Finance, Shopping, Social, Travel, Health, Other</li>
-                <li>Mailgun webhook integration pour réception emails</li>
+                <li>Traitement AI automatique</li>
+                <li>Interface magazine moderne</li>
+                <li>Catégorisation intelligente (9 catégories)</li>
+                <li>Recherche temps réel</li>
+                <li>Filtres avancés</li>
+                <li>Polling auto 30s</li>
+                <li>Mailgun webhook</li>
             </ul>
         </div>
 
         <div class="section">
-            <div class="section-title">🚀 Installation et Démarrage</div>
+            <div class="section-title">🚀 Comment Démarrer</div>
             <div class="command-box">
 # Backend<br>
-<code>cd backend</code><br>
-<code>pip install -r requirements.txt</code><br>
-<code>cp .env.example .env</code><br>
-<em style="color: #94a3b8;"># Ajoutez ANTHROPIC_API_KEY dans .env</em><br>
+<code>cd backend && pip install -r requirements.txt</code><br>
 <code>python scripts/init_db.py</code><br>
 <code>uvicorn app.main:app --reload</code><br><br>
-# Frontend (nouveau terminal)<br>
-<code>cd frontend</code><br>
-<code>npm install</code><br>
-<code>npm run dev</code><br><br>
-<em style="color: #94a3b8;"># Ouvrez http://localhost:5175</em>
+# Frontend<br>
+<code>cd frontend && npm install</code><br>
+<code>npm run dev</code><br>
+<em style="color: #94a3b8;"># http://localhost:5175</em>
             </div>
         </div>
 
+        
         <div class="section">
-            <div class="section-title">📧 Configuration Email</div>
-            <p class="description">
-                <strong>1.</strong> Créez un compte Mailgun (free tier)<br>
-                <strong>2.</strong> Configurez une route de forwarding vers <code>https://your-backend.com/api/webhook/email</code><br>
-                <strong>3.</strong> Transférez vos emails à l'adresse fournie par Mailgun
-            </p>
-        </div>
-
-        <div class="section">
-            <div class="section-title">📦 Déploiement</div>
-            <p class="description">
-                <strong>Backend:</strong> Railway, Render, fly.io<br>
-                <strong>Frontend:</strong> Vercel, Netlify, Cloudflare Pages
-            </p>
-        </div>
-
-        <div class="section">
-            <div class="section-title">✅ Améliorations possibles</div>
+            <div class="section-title">✅ À Compléter / Améliorer</div>
             <ul class="todo-list">
-                <li>Support IMAP/POP3 en plus de Mailgun</li>
-                <li>Notifications push pour nouveaux emails importants</li>
-                <li>Mode hors-ligne avec service worker</li>
-                <li>Export en PDF</li>
-                <li>Intégration calendrier pour emails avec dates</li>
+                <li>Support IMAP/POP3</li>
+                <li>Notifications push</li>
+                <li>Mode hors-ligne</li>
+                <li>Export PDF</li>
                 <li>Dark mode</li>
             </ul>
         </div>
