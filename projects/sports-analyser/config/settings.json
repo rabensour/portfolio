@@ -1,0 +1,19 @@
+{
+  "minOdds": 1.6,
+  "minConfidence": 60,
+  "recentFormMatches": 5,
+  "enabledSports": ["football"],
+  "betTypes": {
+    "1X2": true,
+    "BTTS": true,
+    "overUnder": true,
+    "handicap": false,
+    "corners": false
+  },
+  "comboSettings": {
+    "minBets": 2,
+    "maxBets": 4,
+    "minTotalOdds": 1.6,
+    "maxCorrelation": 0.3
+  }
+}

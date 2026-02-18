@@ -1,0 +1,36 @@
+# 📊 EXEMPLES DE DONNÉES À COPIER-COLLER
+
+## ✅ Résultats Historiques (Format Flashscore)
+
+PSG - OM 3:1 (2:0)
+Lyon - Monaco 2:2 (1:1)
+Lille - Lens 1:0 (0:0)
+Rennes - Nice 2:1 (1:0)
+Monaco - PSG 1:3 (0:2)
+OM - Lyon 0:0 (0:0)
+Lens - Rennes 2:2 (1:1)
+Nice - Lille 1:2 (0:1)
+PSG - Lens 4:0 (3:0)
+Lyon - Rennes 3:1 (1:0)
+
+## 🔮 Matchs à Venir (avec cotes)
+
+PSG vs OM 28/01 21:00 1.65 3.80 5.20
+Lyon vs Monaco 28/01 19:00 2.10 3.40 3.60
+Lille vs Nice 29/01 21:00 1.80 3.50 4.50
+Lens vs Rennes 29/01 17:00 2.40 3.20 3.10
+
+## 🎯 Test complet
+
+1. Copiez les "Résultats Historiques" dans la section Import
+2. Cliquez "Analyser & Enregistrer"
+3. Copiez les "Matchs à Venir"
+4. Cliquez "Analyser & Enregistrer"
+5. Allez dans "Recommandations" pour voir les paris suggérés
+6. Allez dans "Statistiques" et cherchez "PSG" pour voir les stats
+
+## 📝 Format simple aussi accepté
+
+PSG vs OM 3-1
+Lyon vs Monaco 2-2
+Lille vs Lens 1-0

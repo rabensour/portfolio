@@ -1,0 +1,9 @@
+{
+  "claude_model": "claude-sonnet-4-5-20250929",
+  "temperature": 0.7,
+  "max_tokens": 4096,
+  "rag_top_k": 5,
+  "chunk_size": 1000,
+  "chunk_overlap": 200,
+  "auto_ingest_history_every": 5
+}

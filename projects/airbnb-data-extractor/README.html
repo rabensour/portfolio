@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airbnb Listing Extractor</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #e0f2fe 0%, #dcfce7 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+        .back-btn {
+            display: inline-block;
+            margin-bottom: 30px;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #e0f2fe, #dcfce7);
+            color: #0e7490;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        .back-btn:hover { transform: translateX(-5px); }
+        h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #0ea5e9, #10b981);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        .status {
+            display: inline-block;
+            padding: 8px 16px;
+            background: #fef3c7;
+            color: #92400e;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+        }
+        .section {
+            margin: 40px 0;
+        }
+        .section-title {
+            font-size: 1.5rem;
+            color: #1e293b;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #e0f2fe;
+        }
+        .description {
+            color: #475569;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+        }
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .tech-item {
+            padding: 15px;
+            background: linear-gradient(135deg, #e0f2fe, #dcfce7);
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 600;
+            color: #0e7490;
+            transition: all 0.3s;
+        }
+        .tech-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(14, 165, 233, 0.2);
+        }
+        .feature-list, .todo-list {
+            list-style: none;
+            color: #475569;
+        }
+        .feature-list li, .todo-list li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            line-height: 1.6;
+        }
+        .feature-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #10b981;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        .todo-list li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #0ea5e9;
+            font-weight: bold;
+        }
+        .command-box {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            margin: 20px 0;
+            overflow-x: auto;
+            line-height: 1.6;
+        }
+        .command-box code {
+            color: #10b981;
+        }
+        .progress-bar {
+            background: #e0f2fe;
+            border-radius: 10px;
+            height: 30px;
+            margin: 20px 0;
+            overflow: hidden;
+            position: relative;
+        }
+        .progress-fill {
+            background: linear-gradient(135deg, #0ea5e9, #10b981);
+            height: 100%;
+            width: 35%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-btn">← Retour aux projets</a>
+
+        <h1>🏠 Airbnb Listing Extractor</h1>
+        <span class="status">🔄 En cours (35%)</span>
+
+        <div class="progress-bar">
+            <div class="progress-fill">Phase 1 & 2 complètes ✓</div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">📋 Description</div>
+            <p class="description">
+                Extension Chrome pour extraction automatique de données d'annonces Airbnb via sidebar.
+                Stratégie JSON-first avec fallback DOM pour robustesse maximale. Extrait 10 sections (titre, description, localisation GPS, photos, équipements, prix, calendrier, règlement, annulation, avis).
+                Téléchargement ZIP photos >50KB. Export CSV calendrier. Interface dark theme 400px.
+            </p>
+            <p class="description">
+                <strong>Objectif :</strong> Passer de 2 annonces/heure à 5+ pour agent immobilier Tel Aviv copiant annonces entre comptes.
+            </p>
+        </div>
+
+        <div class="section">
+            <div class="section-title">🛠️ Technologies Utilisées</div>
+            <div class="tech-grid">
+                <div class="tech-item">Chrome Extension</div>
+                <div class="tech-item">Manifest V3</div>
+                <div class="tech-item">JavaScript</div>
+                <div class="tech-item">Side Panel API</div>
+                <div class="tech-item">JSZip</div>
+                <div class="tech-item">Canvas API</div>
+                <div class="tech-item">CSS Dark Theme</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">✨ Fonctionnalités Implémentées</div>
+            <ul class="feature-list">
+                <li><strong>Phase 1: Infrastructure (100%)</strong> - Manifest V3, service worker, content script, sidebar UI</li>
+                <li><strong>Phase 2: Extraction (100%)</strong> - JSON extractor + DOM fallback avec 50+ fonctions</li>
+                <li>Extraction JSON prioritaire (10+ chemins par champ)</li>
+                <li>Fallback DOM multi-sélecteurs (3-6 par champ)</li>
+                <li>Validation section par section (errors + warnings)</li>
+                <li>Sidebar dark theme avec 10 accordéons</li>
+                <li>Boutons copie par section</li>
+                <li>Gestion erreurs isolée (une section fail = autres continuent)</li>
+                <li>Message passing background ↔ content ↔ sidebar</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <div class="section-title">🚀 Comment Démarrer</div>
+            <div class="command-box">
+# 1. Créer icônes manuellement<br>
+<em style="color: #94a3b8;"># Voir icons/README.md - besoin 16px, 48px, 128px</em><br><br>
+# 2. Charger extension dans Chrome<br>
+<code>chrome://extensions/ → Mode développeur → Load unpacked</code><br>
+<em style="color: #94a3b8;"># Sélectionner dossier airbnb-data-extractor/</em><br><br>
+# 3. Tester<br>
+<code>1. Aller sur airbnb.com/rooms/XXXXX</code><br>
+<code>2. Cliquer icône extension → Sidebar s'ouvre</code><br>
+<code>3. Cliquer "Extract All"</code><br>
+<em style="color: #94a3b8;"># Vérifier console pour logs extraction</em>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">📁 Architecture du Code</div>
+            <div class="command-box">
+airbnb-data-extractor/<br>
+├── <code>manifest.json</code> - Config extension Manifest V3<br>
+├── <code>background.js</code> - Service worker (routing messages)<br>
+├── content/<br>
+│   ├── <code>content-script.js</code> - Orchestrateur (JSON → DOM fallback)<br>
+│   ├── extractors/<br>
+│   │   ├── <code>json-extractor.js</code> - Parse JSON embarqué (priorité 1)<br>
+│   │   └── <code>dom-extractor.js</code> - Sélecteurs CSS (fallback)<br>
+│   └── utils/<br>
+│       ├── <code>data-validator.js</code> - Validation par section<br>
+│       └── <code>dom-utils.js</code> - 15+ helpers DOM<br>
+└── sidepanel/<br>
+    ├── <code>sidepanel.html</code> - UI 10 accordéons<br>
+    ├── <code>sidepanel.css</code> - Dark theme 400px<br>
+    └── <code>sidepanel.js</code> - Logique UI + messaging
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">✅ Phases Restantes</div>
+            <ul class="todo-list">
+                <li><strong>Phase 3: Calendrier (PRIORITÉ HAUTE)</strong> - 3 stratégies (JSON → API interception → navigation)</li>
+                <li><strong>Phase 4: Photos ZIP</strong> - Download + resize >50KB via Canvas + JSZip</li>
+                <li><strong>Phase 5: UI Polish</strong> - Accordéons animés, "Copy for highlighting", loading states</li>
+                <li><strong>Phase 6: Tests</strong> - Multi-types annonces, .com/.fr, edge cases, performance</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <div class="section-title">🔒 Sécurité & Conformité</div>
+            <p class="description">
+                ✅ Lecture DOM uniquement (aucune requête HTTP vers Airbnb)<br>
+                ✅ Pas d'automation (pas de clics, pas de form fills)<br>
+                ✅ Équivalent inspecteur d'éléments / console DevTools<br>
+                ✅ Chrome Web Store compliant (politique 2026)<br>
+                ✅ Données restent locales (aucun serveur externe)
+            </p>
+        </div>
+
+        <div class="section">
+            <div class="section-title">📊 Statistiques</div>
+            <p class="description">
+                <strong>Lignes de code :</strong> ~2,500+<br>
+                <strong>Fonctions :</strong> 50+ (extraction, validation, utilities)<br>
+                <strong>Chemins JSON :</strong> 10+ par champ (haute résilience)<br>
+                <strong>Sélecteurs DOM :</strong> 3-6 par champ (fallback coverage)<br>
+                <strong>Fichiers créés :</strong> 10/30+ (infrastructure + extracteurs)<br>
+                <strong>Temps dev :</strong> ~2 jours sur 14 estimés
+            </p>
+        </div>
+    </div>
+</body>
+</html>

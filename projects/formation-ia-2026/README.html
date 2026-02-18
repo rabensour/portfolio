@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formation IA 2026</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #e0f2fe 0%, #dcfce7 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+        .back-btn {
+            display: inline-block;
+            margin-bottom: 30px;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #e0f2fe, #dcfce7);
+            color: #0e7490;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        .back-btn:hover { transform: translateX(-5px); }
+        h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #0ea5e9, #10b981);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        .status {
+            display: inline-block;
+            padding: 8px 16px;
+            background: #dbeafe;
+            color: #1e40af;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+        }
+        .section {
+            margin: 40px 0;
+        }
+        .section-title {
+            font-size: 1.5rem;
+            color: #1e293b;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #e0f2fe;
+        }
+        .description {
+            color: #475569;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+        }
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .tech-item {
+            padding: 15px;
+            background: linear-gradient(135deg, #e0f2fe, #dcfce7);
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 600;
+            color: #0e7490;
+            transition: all 0.3s;
+        }
+        .tech-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(14, 165, 233, 0.2);
+        }
+        .feature-list, .todo-list {
+            list-style: none;
+            color: #475569;
+        }
+        .feature-list li, .todo-list li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            line-height: 1.6;
+        }
+        .feature-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #10b981;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        .todo-list li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #0ea5e9;
+            font-weight: bold;
+        }
+        .command-box {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            margin: 20px 0;
+            overflow-x: auto;
+            line-height: 1.6;
+        }
+        .command-box code {
+            color: #10b981;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-btn">← Retour aux projets</a>
+
+        <h1>🎓 Formation IA 2026</h1>
+        <span class="status">⏳ En cours</span>
+
+        <div class="section">
+            <div class="section-title">📋 Description</div>
+            <p class="description">
+                Formation intensive 4 semaines: Agents IA autonomes, Automations no-code (Make.com/n8n), GenAI créative et production.
+            </p>
+        </div>
+
+        <div class="section">
+            <div class="section-title">🛠️ Technologies Utilisées</div>
+            <div class="tech-grid">
+                <div class="tech-item">LLMs (Claude/GPT)</div>
+                <div class="tech-item">LangChain</div>
+                <div class="tech-item">CrewAI</div>
+                <div class="tech-item">Make.com</div>
+                <div class="tech-item">n8n</div>
+                <div class="tech-item">RAG</div>
+                <div class="tech-item">Midjourney</div>
+                <div class="tech-item">Runway</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">✨ Fonctionnalités</div>
+            <ul class="feature-list">
+                <li>Semaine 1: Fondations IA & Automations</li>
+                <li>Semaine 2: Agents IA Autonomes</li>
+                <li>Semaine 3: GenAI Créative</li>
+                <li>Semaine 4: Production & Monétisation</li>
+                <li>15+ projets pratiques</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <div class="section-title">🚀 Comment Démarrer</div>
+            <div class="command-box">
+<code>python -m venv venv</code><br>
+<code>source venv/bin/activate</code><br>
+<code>pip install -r requirements.txt</code><br>
+<em style="color: #94a3b8;"># Voir GUIDE-DEMARRAGE.md</em>
+            </div>
+        </div>
+
+        
+        <div class="section">
+            <div class="section-title">✅ À Compléter / Améliorer</div>
+            <ul class="todo-list">
+                <li>Modules Semaines 1-4 complets</li>
+                <li>15+ projets pratiques</li>
+                <li>Projet final</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

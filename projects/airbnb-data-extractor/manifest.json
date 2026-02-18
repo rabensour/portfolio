@@ -1,0 +1,51 @@
+{
+  "manifest_version": 3,
+  "name": "Airbnb Listing Extractor",
+  "version": "1.0.0",
+  "description": "Extract Airbnb listing data with one click via sidebar panel",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "permissions": [
+    "activeTab",
+    "sidePanel",
+    "downloads"
+  ],
+  "host_permissions": [
+    "https://www.airbnb.com/*",
+    "https://www.airbnb.fr/*",
+    "https://www.airbnb.es/*",
+    "https://www.airbnb.ca/*",
+    "https://*.airbnbcdn.com/*",
+    "https://*.muscache.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.airbnb.com/rooms/*",
+        "https://*.airbnb.fr/rooms/*",
+        "https://*.airbnb.es/rooms/*",
+        "https://*.airbnb.ca/rooms/*"
+      ],
+      "js": [
+        "content/utils/dom-utils.js",
+        "content/utils/data-validator.js",
+        "content/extractors/json-extractor.js",
+        "content/extractors/dom-extractor.js",
+        "content/content-script.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_title": "Airbnb Listing Extractor"
+  },
+  "side_panel": {
+    "default_path": "sidepanel/sidepanel.html"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "collections": {
+    "dev_personnel": {
+      "source_path": "data/source_docs/dev_personnel",
+      "description": "Documents de développement personnel",
+      "priority": 1
+    },
+    "textes_creatifs": {
+      "source_path": "data/source_docs/textes_creatifs",
+      "description": "Textes créatifs (rap, scripts)",
+      "priority": 3
+    },
+    "parcours": {
+      "source_path": "data/source_docs/parcours",
+      "description": "Parcours professionnel et de vie",
+      "priority": 2
+    },
+    "patterns": {
+      "source_path": "data/source_docs/patterns",
+      "description": "Patterns psychologiques identifiés",
+      "priority": 1
+    },
+    "historique_coach": {
+      "source_path": "data/conversation_history",
+      "description": "Conversations passées avec le coach",
+      "priority": 2
+    }
+  }
+}

@@ -1,0 +1,40 @@
+AI Automation Engineer - Remote
+
+Company: TechFlow AI
+Location: Remote (European timezone)
+Type: Full-time
+
+About the role:
+We're looking for an AI Automation Engineer to build and maintain intelligent automation workflows using modern no-code/low-code platforms and AI integrations.
+
+Responsibilities:
+• Design and implement automation workflows using n8n, Make, or Zapier
+• Integrate LLM APIs (OpenAI, Anthropic) into business processes
+• Build webhooks and API integrations to connect various systems
+• Develop Python scripts for custom automation needs
+• Create AI agents and chatbots for internal tools
+• Optimize existing workflows for efficiency
+• Collaborate with product team to understand automation needs
+
+Required skills:
+• Strong experience with n8n, Make, or Zapier
+• Proficiency in Python for scripting and automation
+• Experience with LLM APIs (OpenAI, Claude, etc.)
+• Understanding of webhooks and REST APIs
+• Prompt engineering skills
+• Problem-solving mindset
+
+Nice to have:
+• Experience with Salesforce or CRM automation
+• Knowledge of AI agents and RAG systems
+• Docker and cloud deployment experience
+• Background in full-stack development
+
+What we offer:
+• Flexible remote work
+• Work-life balance (standard 40h/week, no overtime expected)
+• Innovative AI projects
+• Learning budget for courses and certifications
+• Collaborative async-first culture
+
+This is a relaxed, autonomous role focused on smart automation rather than long hours.

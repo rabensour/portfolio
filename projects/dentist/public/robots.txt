@@ -1,0 +1,8 @@
+# robots.txt pour le Cabinet Dentaire Dr Abensour
+
+User-agent: *
+Allow: /
+Disallow: /api/
+
+# Sitemap
+Sitemap: https://cabinet-dentaire-abensour.fr/sitemap.xml

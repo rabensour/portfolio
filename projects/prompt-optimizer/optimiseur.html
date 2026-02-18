@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optimiseur de Prompts Claude</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #D4763A 0%, #8B4513 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            padding: 40px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #D4763A;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 40px;
+            font-size: 1.1em;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .section {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .section h2 {
+            color: #333;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 300px;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1em;
+            font-family: 'Consolas', 'Monaco', monospace;
+            resize: vertical;
+            transition: border-color 0.3s;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #D4763A;
+        }
+
+        .char-count {
+            text-align: right;
+            color: #999;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+
+        button {
+            background: #D4763A;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1em;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            margin: 0 auto;
+            display: block;
+        }
+
+        button:hover {
+            background: #B8652F;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(212, 118, 58, 0.3);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .tips {
+            background: #fff3e0;
+            border-left: 4px solid #D4763A;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+
+        .tips h3 {
+            color: #D4763A;
+            margin-bottom: 15px;
+        }
+
+        .tips ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .tips li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .tips li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #D4763A;
+            font-weight: bold;
+        }
+
+        .example {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .example h4 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .example pre {
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #D4763A;
+            color: white;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            margin-left: 10px;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+            color: #D4763A;
+        }
+
+        .loading.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🤖 Optimiseur de Prompts Claude</h1>
+        <p class="subtitle">Transformez vos prompts basiques en prompts optimisés selon les best practices Anthropic 2025</p>
+
+        <div class="grid">
+            <div class="section">
+                <h2>📝 Votre Prompt <span class="badge">AVANT</span></h2>
+                <textarea id="input" placeholder="Collez votre prompt basique ici...
+
+Exemple :
+Explique-moi comment fonctionne le machine learning"></textarea>
+                <div class="char-count">
+                    <span id="input-count">0</span> caractères
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>✨ Prompt Optimisé <span class="badge">APRÈS</span></h2>
+                <textarea id="output" placeholder="Le prompt optimisé apparaîtra ici..." readonly></textarea>
+                <div class="char-count">
+                    <span id="output-count">0</span> caractères
+                </div>
+            </div>
+        </div>
+
+        <button onclick="optimiser()">🚀 Optimiser mon Prompt</button>
+
+        <div class="loading" id="loading">
+            <p>⏳ Optimisation en cours...</p>
+        </div>
+
+        <div class="tips">
+            <h3>💡 Ce que l'optimiseur ajoute automatiquement :</h3>
+            <ul>
+                <li><strong>Balises XML</strong> : Structure avec &lt;context&gt;, &lt;task&gt;, &lt;output_format&gt;</li>
+                <li><strong>Rôle Claude</strong> : Assigne un rôle d'expert pertinent</li>
+                <li><strong>Chain-of-Thought</strong> : Ajoute "Think step by step" pour tâches complexes</li>
+                <li><strong>Format de sortie</strong> : Spécifie le format attendu</li>
+                <li><strong>Question à la fin</strong> : Réorganise pour mettre la question finale</li>
+                <li><strong>Clarté & Détails</strong> : Reformule pour plus de spécificité</li>
+            </ul>
+        </div>
+
+        <div class="example">
+            <h4>📊 Exemple de transformation :</h4>
+            <pre><strong>AVANT :</strong>
+Help me with Python
+
+<strong>APRÈS :</strong>
+&lt;context&gt;
+You are an expert Python developer with extensive experience
+in teaching programming concepts clearly and effectively.
+&lt;/context&gt;
+
+&lt;task&gt;
+I need comprehensive help with Python programming.
+
+Please cover:
+1. Core concepts and fundamentals
+2. Best practices and common patterns
+3. Practical examples with explanations
+
+Think step by step and provide clear, beginner-friendly explanations.
+&lt;/task&gt;
+
+&lt;output_format&gt;
+- Structured sections for each topic
+- Code examples with comments
+- Key takeaways at the end
+&lt;/output_format&gt;
+
+What should I know to get started with Python effectively?</pre>
+        </div>
+    </div>
+
+    <script>
+        // Compte les caractères
+        document.getElementById('input').addEventListener('input', function() {
+            document.getElementById('input-count').textContent = this.value.length;
+        });
+
+        document.getElementById('output').addEventListener('input', function() {
+            document.getElementById('output-count').textContent = this.value.length;
+        });
+
+        function optimiser() {
+            const input = document.getElementById('input').value.trim();
+
+            if (!input) {
+                alert('Veuillez entrer un prompt !');
+                return;
+            }
+
+            // Affiche le chargement
+            document.getElementById('loading').classList.add('active');
+            document.getElementById('output').value = '';
+
+            // Simule un délai pour l'effet
+            setTimeout(() => {
+                const optimized = optimiserPrompt(input);
+                document.getElementById('output').value = optimized;
+                document.getElementById('output-count').textContent = optimized.length;
+                document.getElementById('loading').classList.remove('active');
+            }, 500);
+        }
+
+        function optimiserPrompt(prompt) {
+            // Détecte le type de demande
+            const isCode = /code|function|script|program|debug|error/i.test(prompt);
+            const isAnalysis = /analyze|compare|explain|understand|why|how/i.test(prompt);
+            const isCreative = /write|create|generate|draft|compose/i.test(prompt);
+            const isData = /data|table|csv|json|database/i.test(prompt);
+
+            // Détermine le rôle
+            let role = "an expert assistant";
+            if (isCode) role = "an expert software developer with deep knowledge of programming best practices";
+            else if (isAnalysis) role = "an analytical expert skilled at breaking down complex topics";
+            else if (isCreative) role = "a creative professional with expertise in content creation";
+            else if (isData) role = "a data analysis expert proficient in working with structured data";
+
+            // Détecte si c'est une tâche complexe
+            const isComplex = prompt.length > 100 || prompt.split('\n').length > 3;
+
+            // Extrait la question principale
+            let mainQuestion = prompt;
+            const questionMatch = prompt.match(/[?!].*$/);
+            if (questionMatch) {
+                mainQuestion = questionMatch[0].trim();
+            } else {
+                // Ajoute une question si pas présente
+                mainQuestion = "How can you help me with this?";
+            }
+
+            // Construction du prompt optimisé
+            let optimized = `<context>\nYou are ${role}.\n</context>\n\n`;
+
+            optimized += `<task>\n`;
+            optimized += `${prompt}\n\n`;
+
+            if (isComplex) {
+                optimized += `Think step by step and provide a comprehensive response.\n`;
+            }
+
+            optimized += `</task>\n\n`;
+
+            // Format de sortie selon le type
+            optimized += `<output_format>\n`;
+            if (isCode) {
+                optimized += `- Clear explanation of the approach\n`;
+                optimized += `- Complete, commented code\n`;
+                optimized += `- Usage examples\n`;
+                optimized += `- Best practices and considerations\n`;
+            } else if (isAnalysis) {
+                optimized += `- Structured breakdown of key points\n`;
+                optimized += `- Clear explanations with examples\n`;
+                optimized += `- Summary of main insights\n`;
+            } else if (isCreative) {
+                optimized += `- Well-structured creative output\n`;
+                optimized += `- Attention to tone and style\n`;
+                optimized += `- Revisions or alternatives if applicable\n`;
+            } else if (isData) {
+                optimized += `- Clear data analysis steps\n`;
+                optimized += `- Formatted output (tables/lists)\n`;
+                optimized += `- Key insights and recommendations\n`;
+            } else {
+                optimized += `- Clear, structured response\n`;
+                optimized += `- Examples where relevant\n`;
+                optimized += `- Summary of key points\n`;
+            }
+            optimized += `</output_format>\n\n`;
+
+            // Question finale
+            if (!questionMatch) {
+                optimized += `${mainQuestion}`;
+            }
+
+            return optimized;
+        }
+
+        // Permet d'optimiser avec Entrée (Ctrl+Enter)
+        document.getElementById('input').addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.key === 'Enter') {
+                optimiser();
+            }
+        });
+    </script>
+</body>
+</html>

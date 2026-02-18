@@ -1,0 +1,311 @@
+/* Dark theme CSS for Airbnb Extractor Sidebar */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background-color: #1a1a1a;
+  color: #e0e0e0;
+  width: 400px;
+  overflow-x: hidden;
+}
+
+.container {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Header */
+.header {
+  background-color: #2a2a2a;
+  padding: 16px;
+  border-bottom: 1px solid #3a3a3a;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header h1 {
+  font-size: 18px;
+  margin-bottom: 12px;
+  color: #ffffff;
+}
+
+.header-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Buttons */
+.btn {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  width: 100%;
+}
+
+.btn-primary {
+  background-color: #ff5a5f;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #e04e53;
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+.btn-secondary {
+  background-color: #3a3a3a;
+  color: #e0e0e0;
+}
+
+.btn-secondary:hover {
+  background-color: #4a4a4a;
+}
+
+.btn-copy {
+  padding: 8px 12px;
+  background-color: #3a3a3a;
+  color: #e0e0e0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+  margin-top: 8px;
+  margin-right: 8px;
+  transition: all 0.2s ease;
+}
+
+.btn-copy:hover {
+  background-color: #4a4a4a;
+}
+
+.btn-copy.success {
+  background-color: #28a745;
+  color: white;
+}
+
+/* Loading */
+.loading {
+  text-align: center;
+  padding: 24px;
+  background-color: #2a2a2a;
+  margin: 16px;
+  border-radius: 8px;
+}
+
+.loading.hidden {
+  display: none;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  margin: 0 auto 12px;
+  border: 4px solid #3a3a3a;
+  border-top-color: #ff5a5f;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Error Banner */
+.error-banner {
+  background-color: #dc3545;
+  color: white;
+  padding: 12px 16px;
+  margin: 16px;
+  border-radius: 6px;
+  position: relative;
+}
+
+.error-banner.hidden {
+  display: none;
+}
+
+.error-content strong {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.error-content ul {
+  margin-left: 20px;
+  font-size: 13px;
+}
+
+.dismiss-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+}
+
+/* Accordion */
+.accordion {
+  padding: 16px;
+}
+
+.accordion-item {
+  background-color: #2a2a2a;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  overflow: hidden;
+  border: 1px solid #3a3a3a;
+}
+
+.accordion-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.2s;
+}
+
+.accordion-header:hover {
+  background-color: #323232;
+}
+
+.accordion-header .icon {
+  font-size: 18px;
+}
+
+.accordion-header > span:nth-child(2) {
+  flex: 1;
+  font-weight: 500;
+}
+
+.accordion-header .chevron {
+  font-size: 12px;
+  transition: transform 0.3s;
+}
+
+.accordion-item.open .chevron {
+  transform: rotate(180deg);
+}
+
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  padding: 0 16px;
+}
+
+.accordion-item.open .accordion-content {
+  max-height: 2000px;
+  padding: 0 16px 16px;
+}
+
+.section-content {
+  background-color: #1a1a1a;
+  padding: 12px;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  font-size: 13px;
+  line-height: 1.6;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.section-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.section-content::-webkit-scrollbar-track {
+  background: #2a2a2a;
+}
+
+.section-content::-webkit-scrollbar-thumb {
+  background: #4a4a4a;
+  border-radius: 3px;
+}
+
+/* Progress */
+.progress {
+  margin-top: 12px;
+  padding: 8px;
+  background-color: #1a1a1a;
+  border-radius: 4px;
+  font-size: 13px;
+  text-align: center;
+}
+
+.progress.hidden {
+  display: none;
+}
+
+/* Utility */
+.hidden {
+  display: none !important;
+}
+
+/* Photos grid */
+.photos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.photo-thumb {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid #3a3a3a;
+}
+
+/* Calendar table */
+.calendar-table {
+  width: 100%;
+  font-size: 12px;
+  border-collapse: collapse;
+}
+
+.calendar-table th,
+.calendar-table td {
+  padding: 6px;
+  text-align: center;
+  border: 1px solid #3a3a3a;
+}
+
+.calendar-table th {
+  background-color: #323232;
+  font-weight: 500;
+}
+
+.calendar-table .available {
+  background-color: #28a74533;
+}
+
+.calendar-table .blocked {
+  background-color: #dc354533;
+}
+
+.calendar-table .special-price {
+  background-color: #ffc10733;
+}

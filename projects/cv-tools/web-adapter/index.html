@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Adapter - Optimiser votre CV pour l'offre</title>
+    <!-- PDF.js library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script>
+        // Configuration PDF.js
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    </script>
+
+    <!-- jsPDF library for PDF generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 1400px;
+            width: 100%;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            padding: 40px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 40px;
+            font-size: 1.1em;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 1024px) {
+            .grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .section {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .section h2 {
+            color: #333;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2em;
+        }
+
+        .section-label {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: 600;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 300px;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 0.95em;
+            font-family: 'Consolas', 'Monaco', monospace;
+            resize: vertical;
+            transition: border-color 0.3s;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .char-count {
+            text-align: right;
+            color: #999;
+            font-size: 0.85em;
+            margin-top: 5px;
+        }
+
+        .file-input-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .file-input-wrapper input[type=file] {
+            position: absolute;
+            left: -9999px;
+        }
+
+        .file-input-label {
+            display: block;
+            padding: 15px;
+            background: #f8f9ff;
+            border: 2px dashed #667eea;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .file-input-label:hover {
+            background: #f0f1ff;
+            border-color: #764ba2;
+        }
+
+        .file-name {
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 8px;
+            display: none;
+        }
+
+        .file-name.show {
+            display: block;
+        }
+
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1em;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            margin: 0 auto;
+            display: block;
+            margin-top: 30px;
+        }
+
+        button:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .tips {
+            background: #f0f1ff;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+            grid-column: 1 / -1;
+        }
+
+        .tips h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .tips ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .tips li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            color: #666;
+        }
+
+        .tips li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+            color: #667eea;
+            font-size: 1.1em;
+        }
+
+        .loading.active {
+            display: block;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .error {
+            background: #ffebee;
+            color: #c62828;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            display: none;
+        }
+
+        .error.show {
+            display: block;
+        }
+
+        .success {
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            display: none;
+        }
+
+        .success.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📄 CV Adapter</h1>
+        <p class="subtitle">Optimisez votre CV pour correspondre parfaitement à l'annonce qui vous intéresse</p>
+
+        <div class="grid">
+            <div class="section">
+                <h2>📝 Votre CV <span class="section-label">ENTRÉE</span></h2>
+                <div class="file-input-wrapper">
+                    <input type="file" id="cvFile" accept=".txt,.pdf,.doc,.docx" />
+                    <label for="cvFile" class="file-input-label">
+                        📎 Cliquez pour importer votre CV
+                        <div class="file-name" id="cvFileName"></div>
+                    </label>
+                </div>
+                <textarea id="cvContent" placeholder="Ou collez directement votre CV ici..."></textarea>
+                <div class="char-count">
+                    <span id="cv-count">0</span> caractères
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>💼 Annonce du Job <span class="section-label">RÉFÉRENCE</span></h2>
+                <textarea id="jobOffer" placeholder="Collez l'annonce du job ici...
+
+Incluez les responsabilités, les compétences requises, les qualifications..."></textarea>
+                <div class="char-count">
+                    <span id="job-count">0</span> caractères
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>✨ CV Optimisé <span class="section-label">RÉSULTAT</span></h2>
+                <textarea id="optimizedCv" placeholder="Votre CV optimisé apparaîtra ici..." readonly></textarea>
+                <button id="downloadPdfBtn" onclick="downloadOptimizedCvAsPdf()" style="margin-top: 10px; padding: 10px 20px; font-size: 0.9em; display: none;">
+                    📥 Télécharger en PDF
+                </button>
+                <div class="char-count">
+                    <span id="output-count">0</span> caractères
+                </div>
+            </div>
+        </div>
+
+        <div class="error" id="error"></div>
+        <div class="success" id="success"></div>
+
+        <button id="optimizeBtn" onclick="optimiseCv()">🚀 Optimiser mon CV</button>
+
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>⏳ Optimisation en cours...</p>
+        </div>
+
+        <div class="tips">
+            <h3>💡 Comment ça marche :</h3>
+            <ul>
+                <li><strong>Analyse de l'offre</strong> : Le système identifie les mots-clés et compétences demandées</li>
+                <li><strong>Restructuration</strong> : Réorganise votre CV pour mettre en avant les expériences pertinentes</li>
+                <li><strong>Adaptation du vocabulaire</strong> : Reformule vos accomplissements avec le vocabulaire de l'annonce</li>
+                <li><strong>Mise en évidence</strong> : Accentue les compétences et expériences qui correspondent</li>
+                <li><strong>Conservation de l'authenticité</strong> : Aucune donnée fictive, juste un meilleur positionnement de vos vraies qualités</li>
+                <li><strong>Format optimisé</strong> : Structure votre CV pour une meilleure lisibilité et impact</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Fonction pour extraire le texte d'un PDF
+        async function extractTextFromPdf(file) {
+            const arrayBuffer = await file.arrayBuffer();
+            const pdf = await pdfjsLib.getDocument({data: arrayBuffer}).promise;
+            let fullText = '';
+
+            for (let i = 1; i <= pdf.numPages; i++) {
+                const page = await pdf.getPage(i);
+                const textContent = await page.getTextContent();
+                const pageText = textContent.items.map(item => item.str).join(' ');
+                fullText += pageText + '\n\n';
+            }
+
+            return fullText;
+        }
+
+        // Gestion du fichier CV
+        document.getElementById('cvFile').addEventListener('change', async function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const fileName = document.getElementById('cvFileName');
+                fileName.textContent = `✓ ${file.name} chargé`;
+                fileName.classList.add('show');
+
+                try {
+                    let content = '';
+
+                    // Vérifier si c'est un PDF
+                    if (file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf')) {
+                        // Afficher un message de chargement
+                        document.getElementById('cvContent').value = '⏳ Extraction du texte du PDF en cours...';
+                        content = await extractTextFromPdf(file);
+                    } else {
+                        // Fichier texte (.txt, .doc, etc.)
+                        const reader = new FileReader();
+                        content = await new Promise((resolve, reject) => {
+                            reader.onload = (event) => resolve(event.target.result);
+                            reader.onerror = reject;
+                            reader.readAsText(file);
+                        });
+                    }
+
+                    document.getElementById('cvContent').value = content;
+                    document.getElementById('cv-count').textContent = content.length;
+                } catch (error) {
+                    showError('Erreur lors de la lecture du fichier : ' + error.message);
+                    console.error('Error reading file:', error);
+                }
+            }
+        });
+
+        // Compte les caractères
+        document.getElementById('cvContent').addEventListener('input', function() {
+            document.getElementById('cv-count').textContent = this.value.length;
+        });
+
+        document.getElementById('jobOffer').addEventListener('input', function() {
+            document.getElementById('job-count').textContent = this.value.length;
+        });
+
+        document.getElementById('optimizedCv').addEventListener('input', function() {
+            document.getElementById('output-count').textContent = this.value.length;
+        });
+
+        function showError(msg) {
+            const errorDiv = document.getElementById('error');
+            errorDiv.textContent = '❌ ' + msg;
+            errorDiv.classList.add('show');
+            setTimeout(() => errorDiv.classList.remove('show'), 5000);
+        }
+
+        function showSuccess(msg) {
+            const successDiv = document.getElementById('success');
+            successDiv.textContent = '✓ ' + msg;
+            successDiv.classList.add('show');
+            setTimeout(() => successDiv.classList.remove('show'), 5000);
+        }
+
+        function optimiseCv() {
+            const cvContent = document.getElementById('cvContent').value.trim();
+            const jobOffer = document.getElementById('jobOffer').value.trim();
+
+            if (!cvContent) {
+                showError('Veuillez entrer ou importer votre CV');
+                return;
+            }
+
+            if (!jobOffer) {
+                showError('Veuillez entrer l\'annonce du job');
+                return;
+            }
+
+            document.getElementById('loading').classList.add('active');
+            document.getElementById('optimizedCv').value = '';
+
+            setTimeout(() => {
+                try {
+                    const optimized = adaptCvToOffer(cvContent, jobOffer);
+                    document.getElementById('optimizedCv').value = optimized;
+                    document.getElementById('output-count').textContent = optimized.length;
+                    document.getElementById('loading').classList.remove('active');
+                    // Afficher le bouton de téléchargement PDF
+                    document.getElementById('downloadPdfBtn').style.display = 'block';
+                    showSuccess('CV optimisé avec succès !');
+                } catch (error) {
+                    document.getElementById('loading').classList.remove('active');
+                    showError('Erreur lors de l\'optimisation : ' + error.message);
+                }
+            }, 800);
+        }
+
+        function extractKeywords(text) {
+            // Mots-clés techniques et compétences courants
+            const keywords = text.toLowerCase().match(/\b[a-z][\w+#-]*\b/g) || [];
+
+            // Liste étendue de mots courants à exclure
+            const commonWords = ['the', 'and', 'for', 'with', 'that', 'this', 'from', 'are', 'can', 'you', 'our', 'has', 'des', 'les', 'que', 'une', 'par', 'est', 'dans', 'sur', 'qui', 'aussi', 'ces', 'nous', 'tout', 'comme', 'mais', 'plus', 'leur', 'bien', 'aux', 'ils', 'sans', 'elle', 'tous', 'ont', 'son', 'ses', 'mon', 'mes', 'tes', 'vos', 'nos', 'process', 'system', 'comp', 'syst', 'accomplissement', 'accomplissements'];
+
+            // Filtre les mots courts et courants, et les mots qui semblent être des fragments
+            const filtered = keywords.filter(w => {
+                // Longueur minimale
+                if (w.length < 4) return false;
+                // Mots courants
+                if (commonWords.includes(w)) return false;
+                // Éviter les fragments de mots composés (ex: "comp" de "compétences")
+                if (w.length < 6 && !w.match(/^(api|rest|soap|git|aws|npm|css|html|sql|nosql|crm|erp)$/i)) return false;
+                return true;
+            });
+
+            // Compte les occurrences et trie
+            const counted = {};
+            filtered.forEach(w => counted[w] = (counted[w] || 0) + 1);
+            return Object.entries(counted)
+                .filter(([_, count]) => count >= 2)
+                .sort((a, b) => b[1] - a[1])
+                .slice(0, 20)
+                .map(([word]) => word);
+        }
+
+        function adaptCvToOffer(cvContent, jobOffer) {
+            const keywordsFromOffer = extractKeywords(jobOffer);
+            const cvLower = cvContent.toLowerCase();
+
+            // Détecte les compétences présentes dans le CV qui correspondent à l'offre
+            const matchedSkills = keywordsFromOffer.filter(keyword =>
+                cvLower.includes(keyword)
+            );
+
+            let result = cvContent;
+
+            // Note : On ne modifie pas la structure du CV original pour préserver l'intégrité du contenu
+            // Les compétences correspondantes seront affichées dans la note d'optimisation
+
+            // Identifie les sections principales
+            const sections = {
+                experience: result.match(/(?:expérience|experience|emploi|postes?|travaux?)[:\s]*([\s\S]*?)(?=\n\n|\n(?:compétence|skill|éducation|formation|contact|phone)|$)/i),
+                skills: result.match(/(?:compétence|skills?|expertise|technique)[:\s]*([\s\S]*?)(?=\n\n|\n(?:expérience|experience|emploi|éducation|formation|contact)|$)/i),
+                education: result.match(/(?:éducation|education|formation)[:\s]*([\s\S]*?)(?=\n\n|\n(?:compétence|skill|experience|emploi|contact)|$)/i)
+            };
+
+            // Réorganise en mettant l'expérience en avant
+            let reorganized = result;
+
+            // Note : On ne modifie plus le contenu du CV pour éviter de casser les mots composés
+            // Les mots-clés seront affichés dans la note d'optimisation en bas
+
+            // Ajoute une note d'adaptation
+            const adaptationNote = `\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n📌 NOTES D'OPTIMISATION\n\nCompétences correspondant à l'annonce (${matchedSkills.length}) :\n${matchedSkills.slice(0, 15).join(' • ')}\n\n💡 Recommandations :\n• Mettez en avant ces compétences dans votre CV\n• Utilisez des exemples concrets pour illustrer votre maîtrise\n• Adaptez le vocabulaire de vos réalisations au jargon de l'offre\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`;
+
+            return reorganized + adaptationNote;
+        }
+
+        // Permet d'optimiser avec Ctrl+Enter
+        document.getElementById('cvContent').addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.key === 'Enter') {
+                optimiseCv();
+            }
+        });
+
+        document.getElementById('jobOffer').addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.key === 'Enter') {
+                optimiseCv();
+            }
+        });
+
+        // ============ GÉNÉRATION PDF ============
+
+        function parseCvData(cvText) {
+            console.log('=== CV TEXT TO PARSE ===');
+            console.log(cvText.substring(0, 500)); // Afficher les 500 premiers caractères
+            console.log('======================');
+
+            // Enlever la section "NOTES D'OPTIMISATION" si présente
+            const notesIndex = cvText.indexOf('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+            let cleanCvText = cvText;
+            if (notesIndex !== -1) {
+                cleanCvText = cvText.substring(0, notesIndex);
+                console.log('Removed optimization notes section');
+            }
+
+            const lines = cleanCvText.split('\n').map(l => l.trim()).filter(l => l);
+            console.log('Total lines:', lines.length);
+            console.log('First 10 lines:', lines.slice(0, 10));
+
+            const data = {
+                name: '',
+                title: '',
+                contact: [],
+                summary: '',
+                experience: [],
+                skills: [],
+                education: [],
+                languages: [],
+                certifications: [],
+                other: []
+            };
+
+            let currentSection = 'other';
+            let currentExperience = null;
+            let foundSummarySection = false;
+
+            for (let i = 0; i < lines.length; i++) {
+                const line = lines[i];
+                const lowerLine = line.toLowerCase();
+
+                // Ignorer les lignes de décoration ou emojis seuls
+                if (line.startsWith('━') || line.startsWith('─') || line.startsWith('📌') || line.match(/^[🎯✨💼📝]+$/)) {
+                    continue;
+                }
+
+                // Détecter le nom (généralement la première ligne non-emoji avec majuscules ou prénom nom)
+                if (!data.name && i < 3) {
+                    // Soit format "PRENOM NOM" en majuscules, soit "Prénom Nom" avec majuscules initiales
+                    if ((line.match(/^[A-Z][A-Z\s]+$/) && line.split(/\s+/).length >= 2) ||
+                        line.match(/^[A-Z][a-zÀ-ÿ]+\s+[A-Z][a-zÀ-ÿ]+/)) {
+                        if (!line.includes('PROFIL') && !line.includes('SUMMARY') && !line.includes('STACK')) {
+                            data.name = line;
+                            console.log('Detected NAME:', line);
+                            continue;
+                        }
+                    }
+                }
+
+                // Détecter le titre professionnel (après le nom, avant les sections)
+                if (!data.title && i <= 5 && line.length > 10 && !foundSummarySection) {
+                    if (lowerLine.includes('developer') || lowerLine.includes('développeur') ||
+                        lowerLine.includes('engineer') || lowerLine.includes('ingénieur') ||
+                        lowerLine.includes('analyst') || lowerLine.includes('consultant') ||
+                        lowerLine.includes('manager') || lowerLine.includes('specialist') ||
+                        lowerLine.includes('salesforce') || lowerLine.includes('full-stack') ||
+                        lowerLine.includes('automation') || lowerLine.includes('ai-driven')) {
+                        data.title = line;
+                        console.log('Detected TITLE:', line);
+                        continue;
+                    }
+                }
+
+                // Détecter les sections (ignorer les lignes trop courtes qui sont probablement des emojis)
+                if (line.length < 3) {
+                    continue;
+                }
+
+                if (lowerLine.includes('profil') || lowerLine.includes('summary') || lowerLine.includes('résumé') || lowerLine.includes('🎯')) {
+                    currentSection = 'summary';
+                    foundSummarySection = true;
+                    console.log('Found SUMMARY section at line:', line);
+                    continue;
+                } else if (lowerLine.includes('expérience') || lowerLine.includes('experience') || lowerLine.includes('emploi')) {
+                    currentSection = 'experience';
+                    console.log('Found EXPERIENCE section at line:', line);
+                    continue;
+                } else if (lowerLine.includes('compétence') || lowerLine.includes('skills') || lowerLine.includes('expertise')) {
+                    currentSection = 'skills';
+                    console.log('Found SKILLS section at line:', line);
+                    continue;
+                } else if (lowerLine.includes('éducation') || lowerLine.includes('formation') || lowerLine.includes('education')) {
+                    currentSection = 'education';
+                    console.log('Found EDUCATION section at line:', line);
+                    continue;
+                } else if (lowerLine.includes('langue') || lowerLine.includes('language')) {
+                    currentSection = 'languages';
+                    console.log('Found LANGUAGES section at line:', line);
+                    continue;
+                } else if (lowerLine.includes('certification') || lowerLine.includes('certificat')) {
+                    currentSection = 'certifications';
+                    console.log('Found CERTIFICATIONS section at line:', line);
+                    continue;
+                } else if (lowerLine.includes('contact') || lowerLine.includes('@') || lowerLine.match(/\d{3}[-.\s]?\d{3}[-.\s]?\d{4}/)) {
+                    currentSection = 'contact';
+                    console.log('Found CONTACT section at line:', line);
+                }
+
+                // Ajouter le contenu à la section appropriée (en nettoyant les emojis et crochets qui ne s'affichent pas bien en PDF)
+                const cleanLine = line.replace(/[🎯💼📝✨📌💡➔→]/g, '').replace(/[\[\]]/g, '').trim();
+
+                switch (currentSection) {
+                    case 'summary':
+                        if (cleanLine.length > 20) {
+                            data.summary += (data.summary ? ' ' : '') + cleanLine;
+                        }
+                        break;
+                    case 'experience':
+                        // Détecter un nouveau poste (généralement une date ou un titre)
+                        if (cleanLine.length < 3) break;
+
+                        if (line.match(/\d{4}/) || line.match(/\b(January|February|March|April|May|June|July|August|September|October|November|December|janvier|février|mars|avril|mai|juin|juillet|août|septembre|octobre|novembre|décembre)\b/i)) {
+                            if (currentExperience) {
+                                data.experience.push(currentExperience);
+                            }
+                            currentExperience = { title: cleanLine, details: [] };
+                        } else if (currentExperience) {
+                            currentExperience.details.push(cleanLine);
+                        } else {
+                            data.experience.push({ title: cleanLine, details: [] });
+                        }
+                        break;
+                    case 'skills':
+                        // Extraire les compétences (souvent séparées par • ou , ou ➔)
+                        console.log('Parsing skills line:', line);
+
+                        // Ignorer les titres de section et les recommandations
+                        if (line.match(/^(compétence|skill|expertise|technique|clé)/i) ||
+                            line.match(/^(utilisez|mettez|adaptez|recommandation|astuce)/i) ||
+                            line.includes('💡') || line.includes('Ø')) {
+                            console.log('Ignoring section title or recommendation');
+                            break;
+                        }
+
+                        // Gérer le format "➔ compétence" ou "→ compétence"
+                        if (cleanLine.length >= 3) {
+                            console.log('Skill extracted:', cleanLine);
+                            data.skills.push(cleanLine);
+                        }
+                        break;
+                    case 'education':
+                        if (cleanLine.length >= 3) {
+                            data.education.push(cleanLine);
+                        }
+                        break;
+                    case 'languages':
+                        if (cleanLine.length >= 3) {
+                            data.languages.push(cleanLine);
+                        }
+                        break;
+                    case 'certifications':
+                        if (cleanLine.length >= 3) {
+                            data.certifications.push(cleanLine);
+                        }
+                        break;
+                    case 'contact':
+                        if (line.includes('@') || line.match(/\d{3}/)) {
+                            data.contact.push(cleanLine);
+                        }
+                        break;
+                    default:
+                        if (cleanLine.length >= 3) {
+                            data.other.push(cleanLine);
+                        }
+                        break;
+                }
+            }
+
+            // Ajouter la dernière expérience
+            if (currentExperience && !data.experience.includes(currentExperience)) {
+                data.experience.push(currentExperience);
+            }
+
+            // Si pas de nom détecté, utiliser le premier "autre"
+            if (!data.name && data.other.length > 0) {
+                data.name = data.other[0];
+                data.other.shift();
+            }
+
+            // Debug: afficher ce qui a été parsé
+            console.log('=== PARSED DATA ===');
+            console.log('Name:', data.name);
+            console.log('Title:', data.title);
+            console.log('Contact:', data.contact);
+            console.log('Summary:', data.summary.substring(0, 100));
+            console.log('Skills count:', data.skills.length);
+            console.log('Skills:', data.skills);
+            console.log('Experience count:', data.experience.length);
+            console.log('Education count:', data.education.length);
+            console.log('Languages count:', data.languages.length);
+            console.log('Certifications count:', data.certifications.length);
+            console.log('===================');
+
+            return data;
+        }
+
+        function downloadOptimizedCvAsPdf() {
+            try {
+                const cvText = document.getElementById('optimizedCv').value;
+                if (!cvText) {
+                    showError('Aucun CV optimisé à télécharger');
+                    return;
+                }
+
+                const data = parseCvData(cvText);
+
+                // Debug: afficher les données parsées
+                console.log('Données parsées du CV:', data);
+
+                // Initialiser jsPDF
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
+
+                const pageWidth = doc.internal.pageSize.getWidth();
+                const pageHeight = doc.internal.pageSize.getHeight();
+                const margin = 15;
+
+                // Deux colonnes : gauche (infos) et droite (contenu principal)
+                const leftColX = margin;
+                const leftColWidth = 55;
+                const rightColX = leftColX + leftColWidth + 10;
+                const rightColWidth = pageWidth - rightColX - margin;
+
+                let leftY = 30;
+                let rightY = 30;
+
+                // ===== EN-TÊTE =====
+                doc.setTextColor(0, 0, 0);
+
+                // Nom
+                doc.setFontSize(20);
+                doc.setFont(undefined, 'bold');
+                doc.text(data.name || 'CV OPTIMISÉ', margin, 15);
+
+                // Titre professionnel
+                if (data.title) {
+                    doc.setTextColor(0, 0, 0);
+                    doc.setFontSize(10);
+                    doc.setFont(undefined, 'bold');
+                    doc.text(data.title, margin, 22);
+                }
+
+                // Ligne de séparation horizontale sous l'en-tête
+                doc.setDrawColor(102, 126, 234);
+                doc.setLineWidth(0.5);
+                doc.line(margin, 25, pageWidth - margin, 25);
+
+                // Reset couleur texte en noir après avoir dessiné la ligne
+                doc.setTextColor(0, 0, 0);
+
+                leftY = 32;
+                rightY = 32;
+
+                // ========================================
+                // COLONNE GAUCHE
+                // ========================================
+
+                // === CONTACT ===
+                doc.setTextColor(0, 0, 0);
+                doc.setFontSize(11);
+                doc.setFont(undefined, 'bold');
+                doc.text('CONTACT', leftColX, leftY);
+                leftY += 5;
+
+                // Ligne de séparation
+                doc.setDrawColor(102, 126, 234);
+                doc.line(leftColX, leftY, leftColX + leftColWidth, leftY);
+                leftY += 5;
+
+                doc.setTextColor(0, 0, 0);
+                doc.setFontSize(9);
+                doc.setFont(undefined, 'normal');
+                data.contact.forEach(contact => {
+                    const contactLines = doc.splitTextToSize(contact, leftColWidth);
+                    doc.text(contactLines, leftColX, leftY);
+                    leftY += contactLines.length * 4;
+                });
+                leftY += 8;
+
+                // === CERTIFICATIONS ===
+                if (data.certifications.length > 0) {
+                    doc.setTextColor(0, 0, 0);
+                    doc.setFontSize(11);
+                    doc.setFont(undefined, 'bold');
+                    doc.text('CERTIFICATIONS', leftColX, leftY);
+                    leftY += 5;
+
+                    doc.setDrawColor(102, 126, 234);
+                    doc.line(leftColX, leftY, leftColX + leftColWidth, leftY);
+                    leftY += 5;
+
+                    doc.setTextColor(0, 0, 0);
+                    doc.setFontSize(9);
+                    doc.setFont(undefined, 'normal');
+                    data.certifications.forEach(cert => {
+                        const certLines = doc.splitTextToSize(cert.replace(/[\[\]]/g, ''), leftColWidth);
+                        doc.text(certLines, leftColX, leftY);
+                        leftY += certLines.length * 4;
+                    });
+                    leftY += 8;
+                }
+
+                // === SKILLS ===
+                if (data.skills.length > 0) {
+                    doc.setTextColor(0, 0, 0);
+                    doc.setFontSize(11);
+                    doc.setFont(undefined, 'bold');
+                    doc.text('SKILLS', leftColX, leftY);
+                    leftY += 5;
+
+                    doc.setDrawColor(102, 126, 234);
+                    doc.line(leftColX, leftY, leftColX + leftColWidth, leftY);
+                    leftY += 5;
+
+                    doc.setTextColor(0, 0, 0);
+                    doc.setFontSize(8);
+                    doc.setFont(undefined, 'normal');
+                    data.skills.forEach(skill => {
+                        const cleanSkill = skill.replace(/[\[\]]/g, '');
+                        const skillLines = doc.splitTextToSize('→ ' + cleanSkill, leftColWidth);
+                        doc.text(skillLines, leftColX, leftY);
+                        leftY += skillLines.length * 4;
+                    });
+                    leftY += 8;
+                }
+
+                // === LANGUAGES ===
+                if (data.languages.length > 0) {
+                    doc.setTextColor(0, 0, 0);
+                    doc.setFontSize(11);
+                    doc.setFont(undefined, 'bold');
+                    doc.text('LANGUAGES', leftColX, leftY);
+                    leftY += 5;
+
+                    doc.setDrawColor(102, 126, 234);
+                    doc.line(leftColX, leftY, leftColX + leftColWidth, leftY);
+                    leftY += 5;
+
+                    doc.setTextColor(0, 0, 0);
+                    doc.setFontSize(9);
+                    doc.setFont(undefined, 'normal');
+                    data.languages.forEach(lang => {
+                        doc.text(lang.replace(/[\[\]]/g, ''), leftColX, leftY);
+                        leftY += 4;
+                    });
+                }
+
+                // ========================================
+                // COLONNE DROITE
+                // ========================================
+
+                // === SUMMARY ===
+                if (data.summary) {
+                    doc.setTextColor(0, 0, 0);
+                    doc.setFontSize(11);
+                    doc.setFont(undefined, 'bold');
+                    doc.text('SUMMARY', rightColX, rightY);
+                    rightY += 5;
+
+                    doc.setDrawColor(102, 126, 234);
+                    doc.line(rightColX, rightY, pageWidth - margin, rightY);
+                    rightY += 5;
+
+                    doc.setTextColor(0, 0, 0);
+                    doc.setFontSize(9);
+                    doc.setFont(undefined, 'normal');
+                    const summaryLines = doc.splitTextToSize(data.summary, rightColWidth);
+                    doc.text(summaryLines, rightColX, rightY);
+                    rightY += summaryLines.length * 4 + 8;
+                }
+
+                // === EXPERIENCE ===
+                if (data.experience.length > 0) {
+                    doc.setTextColor(0, 0, 0);
+                    doc.setFontSize(11);
+                    doc.setFont(undefined, 'bold');
+                    doc.text('EXPERIENCE', rightColX, rightY);
+                    rightY += 5;
+
+                    doc.setDrawColor(102, 126, 234);
+                    doc.line(rightColX, rightY, pageWidth - margin, rightY);
+                    rightY += 5;
+
+                    data.experience.forEach(exp => {
+                        if (rightY > 270) {
+                            doc.addPage();
+                            rightY = 30;
+                        }
+
+                        doc.setTextColor(0, 0, 0);
+                        doc.setFontSize(10);
+                        doc.setFont(undefined, 'bold');
+                        const titleLines = doc.splitTextToSize(exp.title.replace(/[\[\]]/g, ''), rightColWidth);
+                        doc.text(titleLines, rightColX, rightY);
+                        rightY += titleLines.length * 4 + 2;
+
+                        doc.setTextColor(0, 0, 0);
+                        doc.setFontSize(8);
+                        doc.setFont(undefined, 'normal');
+                        exp.details.forEach(detail => {
+                            if (detail.length > 10) {
+                                const detailLines = doc.splitTextToSize('• ' + detail.replace(/[\[\]]/g, ''), rightColWidth - 3);
+                                doc.text(detailLines, rightColX + 2, rightY);
+                                rightY += detailLines.length * 4;
+                            }
+                        });
+                        rightY += 4;
+                    });
+                    rightY += 4;
+                }
+
+                // === EDUCATION ===
+                if (data.education.length > 0) {
+                    if (rightY > 250) {
+                        doc.addPage();
+                        rightY = 30;
+                    }
+
+                    doc.setTextColor(0, 0, 0);
+                    doc.setFontSize(11);
+                    doc.setFont(undefined, 'bold');
+                    doc.text('EDUCATION', rightColX, rightY);
+                    rightY += 5;
+
+                    doc.setDrawColor(102, 126, 234);
+                    doc.line(rightColX, rightY, pageWidth - margin, rightY);
+                    rightY += 5;
+
+                    doc.setTextColor(0, 0, 0);
+                    doc.setFontSize(9);
+                    doc.setFont(undefined, 'normal');
+                    data.education.forEach(edu => {
+                        const eduLines = doc.splitTextToSize('• ' + edu.replace(/[\[\]]/g, ''), rightColWidth);
+                        doc.text(eduLines, rightColX, rightY);
+                        rightY += eduLines.length * 4;
+                    });
+                }
+
+                // ===== FOOTER =====
+                const pageCount = doc.internal.getNumberOfPages();
+                for (let i = 1; i <= pageCount; i++) {
+                    doc.setPage(i);
+                    doc.setTextColor(0, 0, 0);
+                    doc.setFontSize(8);
+                    doc.text('Généré par CV Adapter', pageWidth / 2, doc.internal.pageSize.getHeight() - 10, { align: 'center' });
+                }
+
+                // Télécharger le PDF
+                const fileName = (data.name || 'CV_Optimise').replace(/\s+/g, '_') + '.pdf';
+                doc.save(fileName);
+
+                showSuccess('PDF téléchargé avec succès : ' + fileName);
+            } catch (error) {
+                console.error('Erreur lors de la génération du PDF:', error);
+                showError('Erreur lors de la génération du PDF : ' + error.message);
+            }
+        }
+    </script>
+</body>
+</html>

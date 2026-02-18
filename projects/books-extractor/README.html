@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Essence Extractor</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #e0f2fe 0%, #dcfce7 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+        .back-btn {
+            display: inline-block;
+            margin-bottom: 30px;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #e0f2fe, #dcfce7);
+            color: #0e7490;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        .back-btn:hover { transform: translateX(-5px); }
+        h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #0ea5e9, #10b981);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        .status {
+            display: inline-block;
+            padding: 8px 16px;
+            background: #d1fae5;
+            color: #065f46;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+        }
+        .section {
+            margin: 40px 0;
+        }
+        .section-title {
+            font-size: 1.5rem;
+            color: #1e293b;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #e0f2fe;
+        }
+        .description {
+            color: #475569;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+        }
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .tech-item {
+            padding: 15px;
+            background: linear-gradient(135deg, #e0f2fe, #dcfce7);
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 600;
+            color: #0e7490;
+            transition: all 0.3s;
+        }
+        .tech-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(14, 165, 233, 0.2);
+        }
+        .feature-list, .todo-list {
+            list-style: none;
+            color: #475569;
+        }
+        .feature-list li, .todo-list li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            line-height: 1.6;
+        }
+        .feature-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #10b981;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        .todo-list li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #0ea5e9;
+            font-weight: bold;
+        }
+        .command-box {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            margin: 20px 0;
+            overflow-x: auto;
+            line-height: 1.6;
+        }
+        .command-box code {
+            color: #10b981;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-btn">← Retour aux projets</a>
+
+        <h1>📚 Book Essence Extractor</h1>
+        <span class="status">✓ Terminé</span>
+
+        <div class="section">
+            <div class="section-title">📋 Description</div>
+            <p class="description">
+                Extrait l'essence d'un livre (résumé, enseignements, citations exactes) et envoie automatiquement dans Airtable.
+                Supporte PDF/EPUB/TXT ou recherche en ligne (Project Gutenberg, Wikiquote, Open Library).
+                Les citations sont extraites du vrai texte pour garantir l'exactitude.
+            </p>
+        </div>
+
+        <div class="section">
+            <div class="section-title">🛠️ Technologies Utilisées</div>
+            <div class="tech-grid">
+                <div class="tech-item">Python</div>
+                <div class="tech-item">Claude Opus</div>
+                <div class="tech-item">Airtable API</div>
+                <div class="tech-item">PyPDF2</div>
+                <div class="tech-item">ebooklib</div>
+                <div class="tech-item">BeautifulSoup4</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">✨ Fonctionnalités</div>
+            <ul class="feature-list">
+                <li>Extraction PDF/EPUB/TXT local</li>
+                <li>Recherche automatique Project Gutenberg</li>
+                <li>Citations vérifiées Wikiquote (FR + EN)</li>
+                <li>Métadonnées Open Library</li>
+                <li>Traitement Claude Opus avec texte réel</li>
+                <li>Aperçu terminal avant envoi</li>
+                <li>Push automatique vers Airtable</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <div class="section-title">🚀 Comment Démarrer</div>
+            <div class="command-box">
+# Installation<br>
+<code>pip install anthropic requests pyairtable PyPDF2 ebooklib beautifulsoup4</code><br><br>
+# Configuration clés API<br>
+<code>export ANTHROPIC_API_KEY="sk-ant-..."</code><br>
+<code>export AIRTABLE_API_KEY="pat..."</code><br><br>
+# Lancement<br>
+<code>python book_to_airtable.py</code><br>
+<em style="color: #94a3b8;"># Suivre les instructions interactives</em>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">✅ À Compléter / Améliorer</div>
+            <ul class="todo-list">
+                <li>Support MOBI (Kindle)</li>
+                <li>Batch processing (plusieurs livres d'un coup)</li>
+                <li>Interface web au lieu de CLI</li>
+                <li>Export vers Notion en plus d'Airtable</li>
+                <li>Cache local pour éviter re-processing</li>
+                <li>Support multi-langues automatique</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

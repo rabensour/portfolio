@@ -1,0 +1,39 @@
+{
+  "target_positions": [
+    "Automation Engineer",
+    "Software Automation Developer",
+    "LLM Integration Engineer",
+    "AI Integration Engineer",
+    "No-code/Low-code Developer",
+    "GenAI Engineer",
+    "Automation Specialist"
+  ],
+  "preferred_technologies": [
+    "n8n",
+    "Python",
+    "webhooks",
+    "Make",
+    "Zapier",
+    "OpenAI API",
+    "LLM",
+    "AI",
+    "GenAI",
+    "prompt engineering",
+    "automation",
+    "no-code",
+    "low-code"
+  ],
+  "deal_breakers": {
+    "avoid_keywords": [
+      "chronophage",
+      "time-consuming",
+      "\u00e9nergivore",
+      "demanding hours",
+      "long hours",
+      "overtime required"
+    ],
+    "description": "Postes qui ne sont pas chronophages ni \u00e9nergivores"
+  },
+  "matching_threshold": 50,
+  "anthropic_api_key": "YOUR_ANTHROPIC_API_KEY_HERE"
+}

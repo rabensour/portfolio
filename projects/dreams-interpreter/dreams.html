@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Envoyer rêve à Make</title>
+  </head>
+  <body>
+    <h2>📩 Envoie ton rêve à Make</h2>
+    <label for="date">🗓️ Date du rêve :</label><br /><br />
+    <input
+      type="text"
+      id="date"
+      placeholder="ex: 12 Juillet 2024"
+    /><br /><br />
+    <label for="dream">💭 Ton rêve :</label><br /><br />
+    <textarea
+      id="dream"
+      rows="8"
+      cols="60"
+      placeholder="Colle ton rêve ici..."
+    ></textarea
+    ><br /><br />
+    <label for="interpretation">🔍 Ton interprétation :</label><br />
+    <textarea
+      id="interpretation"
+      rows="5"
+      cols="60"
+      placeholder="Note ici ton interprétation (facultatif)"
+    ></textarea
+    ><br /><br />
+    <!-- CHAMPS CACHÉS POUR SUJET & THÈME -->
+    <input type="hidden" id="sujet" /> <input type="hidden" id="theme" />
+    <button onclick="sendDream()">Envoyer ✅</button>
+    <script>
+      function sendDream() {
+         const date = document.getElementById("date").value.trim(); 
+         const texte = document.getElementById("dream").value.trim(); 
+         const interpretation = document.getElementById("interpretation").value.trim(); if (!date || !texte) { return alert("Merci de remplir au moins la date et le rêve !"); } // Version simplifiée : extrait début du texte 
+         const sujet = texte.split(/[.?!]/)[0]?.slice(0, 100).trim() || "Sujet non défini"; const theme = interpretation.split(/[.?!]/)[0]?.slice(0, 100).trim() || "Thème non défini"; document.getElementById("sujet").value = sujet; document.getElementById("theme").value = theme; fetch("https://hook.eu2.make.com/lf84fkfg9wu46db2i1zan44hcv4bbjjs", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ date: date, texte: texte, interpretation: interpretation, sujet: sujet, theme: theme }) }) .then(() => alert("✅ Rêve envoyé à Make avec sujet & thème !")) .catch(e => alert("❌ Erreur : " + e.message)); }
+    </script>
+  </body>
+</html>

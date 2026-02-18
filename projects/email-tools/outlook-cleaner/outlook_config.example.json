@@ -1,0 +1,19 @@
+{
+  "client_id": "YOUR-APPLICATION-CLIENT-ID-HERE",
+  "tenant_id": "common",
+  "notes": {
+    "client_id": "Get this from Azure Portal > App Registrations > Your App > Overview",
+    "tenant_id": "Use 'common' for personal Microsoft accounts, or your specific tenant ID for organizational accounts",
+    "setup_instructions": [
+      "1. Go to https://portal.azure.com/",
+      "2. Navigate to Azure Active Directory > App registrations",
+      "3. Create a new registration named 'Email Cleaner'",
+      "4. Copy the Application (client) ID",
+      "5. Go to API permissions > Add permission > Microsoft Graph",
+      "6. Add 'Mail.ReadWrite' delegated permission",
+      "7. Go to Authentication > Advanced settings",
+      "8. Enable 'Allow public client flows'",
+      "9. Copy this file to 'outlook_config.json' and replace YOUR-APPLICATION-CLIENT-ID-HERE with your actual client ID"
+    ]
+  }
+}

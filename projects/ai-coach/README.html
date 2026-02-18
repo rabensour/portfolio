@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Personal Coach with RAG</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #e0f2fe 0%, #dcfce7 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+        .back-btn {
+            display: inline-block;
+            margin-bottom: 30px;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #e0f2fe, #dcfce7);
+            color: #0e7490;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        .back-btn:hover { transform: translateX(-5px); }
+        h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #0ea5e9, #10b981);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        .status {
+            display: inline-block;
+            padding: 8px 16px;
+            background: #d1fae5;
+            color: #065f46;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+        }
+        .section {
+            margin: 40px 0;
+        }
+        .section-title {
+            font-size: 1.5rem;
+            color: #1e293b;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #e0f2fe;
+        }
+        .description {
+            color: #475569;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+        }
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .tech-item {
+            padding: 15px;
+            background: linear-gradient(135deg, #e0f2fe, #dcfce7);
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 600;
+            color: #0e7490;
+            transition: all 0.3s;
+        }
+        .tech-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(14, 165, 233, 0.2);
+        }
+        .feature-list, .todo-list {
+            list-style: none;
+            color: #475569;
+        }
+        .feature-list li, .todo-list li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            line-height: 1.6;
+        }
+        .feature-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #10b981;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        .todo-list li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #0ea5e9;
+            font-weight: bold;
+        }
+        .command-box {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            margin: 20px 0;
+            overflow-x: auto;
+            line-height: 1.6;
+        }
+        .command-box code {
+            color: #10b981;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-btn">← Retour aux projets</a>
+
+        <h1>🤖 AI Personal Coach with RAG</h1>
+        <span class="status">✓ Terminé</span>
+
+        <div class="section">
+            <div class="section-title">📋 Description</div>
+            <p class="description">
+                Système de coaching IA intelligent avec RAG utilisant ChromaDB. Détecte votre état (fatigue, énergie, auto-sabotage) et fournit des directives claires. Mémoire longue terme avec auto-ingestion des conversations.
+            </p>
+        </div>
+
+        <div class="section">
+            <div class="section-title">🛠️ Technologies Utilisées</div>
+            <div class="tech-grid">
+                <div class="tech-item">Python 3.8+</div>
+                <div class="tech-item">Claude API</div>
+                <div class="tech-item">ChromaDB</div>
+                <div class="tech-item">RAG System</div>
+                <div class="tech-item">Vector Embeddings</div>
+                <div class="tech-item">CLI Interface</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">✨ Fonctionnalités</div>
+            <ul class="feature-list">
+                <li>Base vectorielle ChromaDB avec 5 collections</li>
+                <li>RAG pour contexte ultra-personnalisé</li>
+                <li>Détection d'état émotionnel</li>
+                <li>Coaching directif clair</li>
+                <li>Mémoire longue terme</li>
+                <li>Interface CLI interactive</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <div class="section-title">🚀 Comment Démarrer</div>
+            <div class="command-box">
+<code>cd ai-coach</code><br>
+<code>pip install -r requirements.txt</code><br>
+<code>cp .env.example .env</code><br>
+<em style="color: #94a3b8;"># Ajoutez ANTHROPIC_API_KEY</em><br>
+<code>python scripts/ingest_all.py</code><br>
+<code>python main.py</code>
+            </div>
+        </div>
+
+        
+        <div class="section">
+            <div class="section-title">✅ À Compléter / Améliorer</div>
+            <ul class="todo-list">
+                <li>Interface web React</li>
+                <li>Export/import sessions</li>
+                <li>Dashboard statistiques</li>
+                <li>Support multi-utilisateurs</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

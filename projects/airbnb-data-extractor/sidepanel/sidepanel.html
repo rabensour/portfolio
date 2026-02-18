@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=400">
+  <title>Airbnb Extractor</title>
+  <link rel="stylesheet" href="sidepanel.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <h1>Airbnb Extractor</h1>
+      <div class="header-actions">
+        <button id="extractBtn" class="btn btn-primary">Extract All</button>
+        <button id="copyAllJsonBtn" class="btn btn-secondary">Copy All (JSON)</button>
+      </div>
+    </header>
+
+    <!-- Loading indicator -->
+    <div id="loading" class="loading hidden">
+      <div class="spinner"></div>
+      <p>Extracting data...</p>
+    </div>
+
+    <!-- Error banner -->
+    <div id="errorBanner" class="error-banner hidden">
+      <div class="error-content">
+        <strong>⚠️ Extraction Issues:</strong>
+        <ul id="errorList"></ul>
+      </div>
+      <button id="dismissError" class="dismiss-btn">×</button>
+    </div>
+
+    <!-- Accordion sections -->
+    <div class="accordion">
+      <!-- Section 1: Title -->
+      <div class="accordion-item">
+        <div class="accordion-header">
+          <span class="icon">📝</span>
+          <span>Title</span>
+          <span class="chevron">▼</span>
+        </div>
+        <div class="accordion-content">
+          <div id="titleContent" class="section-content"></div>
+          <button class="btn-copy" data-section="title">Copy</button>
+        </div>
+      </div>
+
+      <!-- Section 2: Description -->
+      <div class="accordion-item">
+        <div class="accordion-header">
+          <span class="icon">📄</span>
+          <span>Description</span>
+          <span class="chevron">▼</span>
+        </div>
+        <div class="accordion-content">
+          <div id="descriptionContent" class="section-content"></div>
+          <button class="btn-copy" data-section="description">Copy</button>
+        </div>
+      </div>
+
+      <!-- Section 3: Photos -->
+      <div class="accordion-item">
+        <div class="accordion-header">
+          <span class="icon">📸</span>
+          <span>Photos</span>
+          <span class="chevron">▼</span>
+        </div>
+        <div class="accordion-content">
+          <div id="photosContent" class="section-content"></div>
+          <button class="btn-copy" data-section="photos">Copy URLs</button>
+        </div>
+      </div>
+
+      <!-- Section 4: Equipements -->
+      <div class="accordion-item">
+        <div class="accordion-header">
+          <span class="icon">🛋️</span>
+          <span>Equipements</span>
+          <span class="chevron">▼</span>
+        </div>
+        <div class="accordion-content">
+          <div id="amenitiesContent" class="section-content"></div>
+          <button class="btn-copy" data-section="amenities">Copy</button>
+        </div>
+      </div>
+
+      <!-- Section 5: Prix -->
+      <div class="accordion-item">
+        <div class="accordion-header">
+          <span class="icon">💰</span>
+          <span>Prix</span>
+          <span class="chevron">▼</span>
+        </div>
+        <div class="accordion-content">
+          <div id="pricingContent" class="section-content"></div>
+          <button class="btn-copy" data-section="pricing">Copy</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="sidepanel.js"></script>
+</body>
+</html>

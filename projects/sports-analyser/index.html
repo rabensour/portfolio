@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sports Analyser - Recommandations Paris Sportifs</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #e0f2fe 0%, #dcfce7 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #0ea5e9, #10b981);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        .tab {
+            padding: 12px 24px;
+            background: white;
+            border: 2px solid transparent;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            color: #475569;
+            transition: all 0.3s;
+        }
+        .tab:hover {
+            background: linear-gradient(135deg, #e0f2fe, #dcfce7);
+            color: #0e7490;
+        }
+        .tab.active {
+            background: linear-gradient(135deg, #0ea5e9, #10b981);
+            color: white;
+        }
+        .panel {
+            display: none;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+        .panel.active {
+            display: block;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #1e293b;
+        }
+        input, textarea, select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+        textarea {
+            resize: vertical;
+            min-height: 150px;
+            font-family: 'Courier New', monospace;
+        }
+        button {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #0ea5e9, #10b981);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3);
+        }
+        .results {
+            margin-top: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, #f0f9ff, #f0fdf4);
+            border-radius: 10px;
+        }
+        .recommendation {
+            background: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+            border-left: 4px solid #0ea5e9;
+        }
+        .combo {
+            border-left-color: #10b981;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .stat-card {
+            background: linear-gradient(135deg, #e0f2fe, #dcfce7);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #0e7490;
+        }
+        .stat-label {
+            color: #475569;
+            margin-top: 5px;
+        }
+        .success {
+            padding: 15px;
+            background: #d1fae5;
+            color: #065f46;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .error {
+            padding: 15px;
+            background: #fee2e2;
+            color: #991b1b;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th {
+            background: linear-gradient(135deg, #0ea5e9, #10b981);
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+        td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        tr:hover {
+            background: linear-gradient(135deg, #f0f9ff, #f0fdf4);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎯 Sports Analyser</h1>
+
+        <div class="tabs">
+            <div class="tab active" onclick="showTab('results')">Ajouter Résultats</div>
+            <div class="tab" onclick="showTab('upcoming')">Matchs à Venir</div>
+            <div class="tab" onclick="showTab('recommendations')">Recommandations</div>
+            <div class="tab" onclick="showTab('stats')">Statistiques</div>
+            <div class="tab" onclick="showTab('config')">Configuration</div>
+        </div>
+
+        <!-- Ajouter Résultats -->
+        <div id="results" class="panel active">
+            <h2>Ajouter Résultats Historiques</h2>
+            <div class="form-group">
+                <label>Sport</label>
+                <select id="results-sport">
+                    <option value="football">Football</option>
+                    <option value="basketball">Basketball</option>
+                    <option value="tennis">Tennis</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>
+                    <input type="checkbox" id="results-smart" style="width: auto; display: inline; margin-right: 8px;">
+                    🧠 Mode IA (accepte n'importe quel format/langue)
+                </label>
+            </div>
+            <div class="form-group">
+                <label>Résultats</label>
+                <textarea id="results-text" placeholder="Mode standard: PSG 2-1 Lyon&#10;Mode IA: texte libre, n'importe quel format"></textarea>
+            </div>
+            <button onclick="addResults()">Ajouter Résultats</button>
+            <button onclick="viewResults()" style="background: linear-gradient(135deg, #6366f1, #8b5cf6); margin-left: 10px;">Voir Résultats Enregistrés</button>
+            <div id="results-output"></div>
+
+            <div id="results-table" style="margin-top: 30px;"></div>
+        </div>
+
+        <!-- Matchs à Venir -->
+        <div id="upcoming" class="panel">
+            <h2>Ajouter Matchs à Venir</h2>
+            <div class="form-group">
+                <label>Sport</label>
+                <select id="upcoming-sport">
+                    <option value="football">Football</option>
+                    <option value="basketball">Basketball</option>
+                    <option value="tennis">Tennis</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>
+                    <input type="checkbox" id="upcoming-smart" style="width: auto; display: inline; margin-right: 8px;">
+                    🧠 Mode IA (accepte n'importe quel format/langue)
+                </label>
+            </div>
+            <div class="form-group">
+                <label>Matchs à Venir</label>
+                <textarea id="upcoming-text" placeholder="Mode standard: PSG vs Lyon&#10;Mode IA: texte libre, n'importe quel format"></textarea>
+            </div>
+            <button onclick="addUpcoming()">Ajouter Matchs</button>
+            <button onclick="viewUpcoming()" style="background: linear-gradient(135deg, #6366f1, #8b5cf6); margin-left: 10px;">Voir Matchs Enregistrés</button>
+            <div id="upcoming-output"></div>
+
+            <div id="upcoming-table" style="margin-top: 30px;"></div>
+        </div>
+
+        <!-- Recommandations -->
+        <div id="recommendations" class="panel">
+            <h2>Recommandations Paris</h2>
+            <div class="form-group">
+                <label>Sport</label>
+                <select id="reco-sport">
+                    <option value="football">Football</option>
+                    <option value="basketball">Basketball</option>
+                    <option value="tennis">Tennis</option>
+                </select>
+            </div>
+            <button onclick="getRecommendations()">Générer Recommandations</button>
+            <div id="recommendations-output"></div>
+        </div>
+
+        <!-- Statistiques -->
+        <div id="stats" class="panel">
+            <h2>Statistiques Équipe</h2>
+            <div class="form-group">
+                <label>Nom de l'équipe</label>
+                <input type="text" id="stats-team" placeholder="PSG">
+            </div>
+            <div class="form-group">
+                <label>Sport</label>
+                <select id="stats-sport">
+                    <option value="football">Football</option>
+                    <option value="basketball">Basketball</option>
+                    <option value="tennis">Tennis</option>
+                </select>
+            </div>
+            <button onclick="getStats()">Voir Statistiques</button>
+            <div id="stats-output"></div>
+        </div>
+
+        <!-- Configuration -->
+        <div id="config" class="panel">
+            <h2>Configuration</h2>
+            <button onclick="getConfig()">Charger Configuration</button>
+            <div id="config-output" style="margin-top: 20px;"></div>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'http://localhost:5200';
+
+        function showTab(tabName) {
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.panel').forEach(panel => panel.classList.remove('active'));
+            event.target.classList.add('active');
+            document.getElementById(tabName).classList.add('active');
+        }
+
+        async function addResults() {
+            const sport = document.getElementById('results-sport').value;
+            const text = document.getElementById('results-text').value;
+            const useSmart = document.getElementById('results-smart').checked;
+            const output = document.getElementById('results-output');
+
+            if (useSmart) {
+                output.innerHTML = '<div style="color: #0ea5e9;">🧠 Analyse IA en cours...</div>';
+            }
+
+            try {
+                const response = await fetch(`${API_URL}/api/results`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ sport, text, useSmart })
+                });
+                const data = await response.json();
+
+                if (data.success) {
+                    output.innerHTML = `<div class="success">✓ ${data.count} résultat(s) ajouté(s) avec succès!${useSmart ? ' (IA)' : ''}</div>`;
+                    document.getElementById('results-text').value = '';
+                } else {
+                    output.innerHTML = `<div class="error">Erreur: ${data.error}</div>`;
+                }
+            } catch (error) {
+                output.innerHTML = `<div class="error">Erreur: ${error.message}</div>`;
+            }
+        }
+
+        async function addUpcoming() {
+            const sport = document.getElementById('upcoming-sport').value;
+            const text = document.getElementById('upcoming-text').value;
+            const useSmart = document.getElementById('upcoming-smart').checked;
+            const output = document.getElementById('upcoming-output');
+
+            if (useSmart) {
+                output.innerHTML = '<div style="color: #0ea5e9;">🧠 Analyse IA en cours...</div>';
+            }
+
+            try {
+                const response = await fetch(`${API_URL}/api/upcoming`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ sport, text, useSmart })
+                });
+                const data = await response.json();
+
+                if (data.success) {
+                    output.innerHTML = `<div class="success">✓ ${data.count} match(s) ajouté(s) avec succès!${useSmart ? ' (IA)' : ''}</div>`;
+                    document.getElementById('upcoming-text').value = '';
+                } else {
+                    output.innerHTML = `<div class="error">Erreur: ${data.error}</div>`;
+                }
+            } catch (error) {
+                output.innerHTML = `<div class="error">Erreur: ${error.message}</div>`;
+            }
+        }
+
+        async function getRecommendations() {
+            const sport = document.getElementById('reco-sport').value;
+            const output = document.getElementById('recommendations-output');
+
+            try {
+                const response = await fetch(`${API_URL}/api/recommendations?sport=${sport}`);
+                const data = await response.json();
+
+                console.log('📊 Recommendations data:', data);
+
+                let html = '<div class="results"><h3>Paris Simples</h3>';
+
+                if (data.singles && data.singles.length > 0) {
+                    data.singles.forEach(rec => {
+                        console.log('📝 Single rec:', rec);
+                        const reasons = Array.isArray(rec.reasoning)
+                            ? rec.reasoning.join(', ')
+                            : rec.reasoning;
+                        html += `<div class="recommendation">
+                            <strong>${rec.match || 'N/A'}</strong><br>
+                            📊 Prédiction: ${rec.selection || 'N/A'}<br>
+                            💰 Cote: ${rec.odds ? rec.odds.toFixed(2) : 'N/A'}<br>
+                            ✅ Confiance: ${rec.confidence ? rec.confidence.toFixed(1) : 'N/A'}%<br>
+                            📝 Raison: ${reasons || 'N/A'}
+                        </div>`;
+                    });
+                } else {
+                    html += '<p>Aucune recommandation disponible. Vérifie que:<br>- Tu as des matchs à venir<br>- Tu as assez d\'historique pour les équipes concernées</p>';
+                }
+
+                html += '<h3 style="margin-top: 20px;">Paris Combinés</h3>';
+
+                if (data.combos && data.combos.length > 0) {
+                    data.combos.forEach(combo => {
+                        console.log('📝 Combo rec:', combo);
+                        html += `<div class="recommendation combo">
+                            <strong>Combiné ${combo.size || 'N/A'} paris</strong><br>
+                            ✅ Confiance: ${combo.confidence ? combo.confidence.toFixed(1) : 'N/A'}%<br>
+                            💰 Cote potentielle: ${combo.potentialOdds ? combo.potentialOdds.toFixed(2) : 'N/A'}
+                        </div>`;
+                    });
+                } else {
+                    html += '<p>Aucun combiné disponible (besoin de 2+ recommandations)</p>';
+                }
+
+                html += '</div>';
+                output.innerHTML = html;
+            } catch (error) {
+                output.innerHTML = `<div class="error">Erreur: ${error.message}</div>`;
+            }
+        }
+
+        async function getStats() {
+            const team = document.getElementById('stats-team').value;
+            const sport = document.getElementById('stats-sport').value;
+            const output = document.getElementById('stats-output');
+
+            if (!team) {
+                output.innerHTML = '<div class="error">Veuillez entrer un nom d\'équipe</div>';
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_URL}/api/stats/${encodeURIComponent(team)}?sport=${sport}`);
+                const stats = await response.json();
+
+                const winRate = stats.overall.matchesPlayed > 0
+                    ? ((stats.overall.wins / stats.overall.matchesPlayed) * 100).toFixed(1) + '%'
+                    : 'N/A';
+
+                const html = `<div class="results">
+                    <h3>Statistiques: ${team}</h3>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-value">${stats.overall.matchesPlayed}</div>
+                            <div class="stat-label">Matchs joués</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">${stats.overall.wins}</div>
+                            <div class="stat-label">Victoires</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">${stats.overall.draws}</div>
+                            <div class="stat-label">Nuls</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">${stats.overall.losses}</div>
+                            <div class="stat-label">Défaites</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">${winRate}</div>
+                            <div class="stat-label">Taux de victoire</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">${stats.formLast5}</div>
+                            <div class="stat-label">Forme récente</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">${stats.overall.goalsFor}</div>
+                            <div class="stat-label">Buts marqués</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">${stats.overall.goalsAgainst}</div>
+                            <div class="stat-label">Buts encaissés</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">${stats.overall.avgGoalsFor.toFixed(2)}</div>
+                            <div class="stat-label">Moy. buts/match</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">${stats.advanced.bttsPercentage.toFixed(0)}%</div>
+                            <div class="stat-label">BTTS %</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">${stats.advanced.over25Percentage.toFixed(0)}%</div>
+                            <div class="stat-label">+2.5 buts %</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">${stats.recentTrends.winStreak}</div>
+                            <div class="stat-label">Série victoires</div>
+                        </div>
+                    </div>
+                </div>`;
+
+                output.innerHTML = html;
+            } catch (error) {
+                output.innerHTML = `<div class="error">Erreur: ${error.message}</div>`;
+            }
+        }
+
+        async function getConfig() {
+            const output = document.getElementById('config-output');
+
+            try {
+                const response = await fetch(`${API_URL}/api/config`);
+                const config = await response.json();
+
+                const html = `<div class="results">
+                    <pre style="background: white; padding: 20px; border-radius: 10px; overflow-x: auto;">${JSON.stringify(config, null, 2)}</pre>
+                </div>`;
+
+                output.innerHTML = html;
+            } catch (error) {
+                output.innerHTML = `<div class="error">Erreur: ${error.message}</div>`;
+            }
+        }
+
+        async function viewResults() {
+            const output = document.getElementById('results-table');
+            const sport = document.getElementById('results-sport').value;
+
+            try {
+                const response = await fetch(`${API_URL}/api/results`);
+                const data = await response.json();
+                const matches = data[sport] || [];
+
+                if (matches.length === 0) {
+                    output.innerHTML = '<div class="error">Aucun résultat enregistré pour ce sport</div>';
+                    return;
+                }
+
+                let html = `<div class="results">
+                    <h3>${matches.length} Résultat(s) - ${sport.charAt(0).toUpperCase() + sport.slice(1)}</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Domicile</th>
+                                <th>Score</th>
+                                <th>Extérieur</th>
+                            </tr>
+                        </thead>
+                        <tbody>`;
+
+                matches.forEach(match => {
+                    const date = new Date(match.date).toLocaleDateString('fr-FR', {
+                        day: '2-digit',
+                        month: '2-digit',
+                        year: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    });
+                    html += `<tr>
+                        <td>${date}</td>
+                        <td><strong>${match.homeTeam}</strong></td>
+                        <td style="text-align: center; font-weight: bold; color: #0ea5e9;">${match.scoreHome} - ${match.scoreAway}</td>
+                        <td><strong>${match.awayTeam}</strong></td>
+                    </tr>`;
+                });
+
+                html += `</tbody></table></div>`;
+                output.innerHTML = html;
+            } catch (error) {
+                output.innerHTML = `<div class="error">Erreur: ${error.message}</div>`;
+            }
+        }
+
+        async function viewUpcoming() {
+            const output = document.getElementById('upcoming-table');
+            const sport = document.getElementById('upcoming-sport').value;
+
+            try {
+                const response = await fetch(`${API_URL}/api/upcoming`);
+                const data = await response.json();
+                const matches = data[sport] || [];
+
+                if (matches.length === 0) {
+                    output.innerHTML = '<div class="error">Aucun match à venir enregistré pour ce sport. Ajoute des matchs ci-dessus pour obtenir des recommandations!</div>';
+                    return;
+                }
+
+                let html = `<div class="results">
+                    <h3>${matches.length} Match(s) à Venir - ${sport.charAt(0).toUpperCase() + sport.slice(1)}</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Domicile</th>
+                                <th>vs</th>
+                                <th>Extérieur</th>
+                                <th>Cotes</th>
+                            </tr>
+                        </thead>
+                        <tbody>`;
+
+                matches.forEach(match => {
+                    const date = new Date(match.date).toLocaleDateString('fr-FR', {
+                        day: '2-digit',
+                        month: '2-digit',
+                        year: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    });
+                    const odds = match.odds?.['1X2']
+                        ? `${match.odds['1X2'].home} / ${match.odds['1X2'].draw} / ${match.odds['1X2'].away}`
+                        : 'N/A';
+                    html += `<tr>
+                        <td>${date}</td>
+                        <td><strong>${match.homeTeam}</strong></td>
+                        <td style="text-align: center;">vs</td>
+                        <td><strong>${match.awayTeam}</strong></td>
+                        <td>${odds}</td>
+                    </tr>`;
+                });
+
+                html += `</tbody></table></div>`;
+                output.innerHTML = html;
+            } catch (error) {
+                output.innerHTML = `<div class="error">Erreur: ${error.message}</div>`;
+            }
+        }
+    </script>
+</body>
+</html>

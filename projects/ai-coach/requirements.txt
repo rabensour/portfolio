@@ -1,0 +1,19 @@
+# API Claude
+anthropic
+
+# Base vectorielle
+chromadb
+
+# Chargement de documents
+pypdf
+python-docx
+
+# Configuration
+python-dotenv
+
+# Interface CLI
+rich
+
+# Optionnel: chunking avancé
+langchain
+langchain-text-splitters

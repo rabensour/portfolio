@@ -1,0 +1,99 @@
+{
+  "personal_info": {
+    "name": "Raphael ABENSOUR",
+    "title": "FULL-STACK & AI-DRIVEN AUTOMATION",
+    "phone": "058-401-0393",
+    "email": "shayaben21@gmail.com",
+    "languages": {
+      "French": "Native",
+      "English": "Fluent",
+      "Hebrew": "Fluent"
+    }
+  },
+  "summary": "Versatile Full-Stack and Salesforce Developer with a robust background in crafting CRM workflows, process automations, and backend integrations. Proficient in Apex, API-based logic, and actively transitioning into AI-driven solutions, including LLM integrations and automation engineering. Adept at collaborating across teams and leveraging tools to build scalable, sustainable systems. Currently mastering no-code/low-code platforms to enhance delivery speed and cross-tool synergy.",
+  "skills": {
+    "ai_automation": [
+      "LLM Integrations",
+      "AI Agents",
+      "Machine Learning",
+      "Prompt Engineering"
+    ],
+    "no_code_low_code": [
+      "Make",
+      "Zapier",
+      "n8n"
+    ],
+    "programming": [
+      "Python",
+      "Node.js",
+      "JavaScript",
+      "Apex"
+    ],
+    "apis": [
+      "RESTful API",
+      "SOAP API",
+      "OpenAI API",
+      "Webhooks"
+    ],
+    "automation": [
+      "Workflow Automations",
+      "Data Extraction",
+      "Process Automation"
+    ],
+    "infrastructure": [
+      "Git",
+      "AWS",
+      "Docker",
+      "MongoDB",
+      "Redis"
+    ],
+    "tools": [
+      "Agile",
+      "Jira",
+      "Salesforce"
+    ]
+  },
+  "experience": [
+    {
+      "title": "Salesforce Developer",
+      "company": "VO2 Group",
+      "location": "Jerusalem",
+      "period": "September 2023 – Present",
+      "responsibilities": [
+        "Designed workflow automations with Salesforce Flows, Apex logic, and API integrations, laying the groundwork for AI-enhanced process optimization",
+        "Connected Salesforce to third-party systems using REST and SOAP APIs to automate data flows and service triggers",
+        "Collaborated with product and service teams to align business logic, user processes, and automation rules",
+        "Created Lightning Web Components and configured dashboards to boost usability and stakeholder visibility",
+        "Improved CRM segmentation and campaign reporting for luxury brands"
+      ]
+    },
+    {
+      "title": "Full-Stack Developer",
+      "company": "Feelter",
+      "location": "Tel Aviv",
+      "period": "March 2020 – March 2023",
+      "responsibilities": [
+        "Built backend tools and APIs to automate product review data extraction",
+        "Built scalable scraping workflows and managed MongoDB and Redis to structure customer sentiment analysis",
+        "Supported marketing and product teams by delivering automation-ready datasets and structured feedback loops",
+        "Integrated services via AWS and Docker",
+        "Participated in frontend logic adjustments to ensure smooth user flow and system alignment"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "degree": "BSc in Computer Science",
+      "institution": "Lev Academic Center",
+      "period": "2016 – 2019"
+    },
+    {
+      "degree": "Full-Stack Bootcamp",
+      "institution": "Israel Tech Challenge (ITC)",
+      "period": "October – March 2020"
+    }
+  ],
+  "certifications": [
+    "Salesforce Platform Developer I"
+  ]
+}
