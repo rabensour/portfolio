@@ -14,7 +14,7 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #0a192f 0%, #0d2a45 50%, #0a3d62 100%);
             min-height: 100vh;
             padding: 40px 20px;
         }
@@ -35,7 +35,7 @@
 
         h1 {
             font-size: 3rem;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: linear-gradient(135deg, #64ffda, #00b4d8, #0072ff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 15px;
@@ -95,8 +95,8 @@
         }
 
         .tech-badge {
-            background: linear-gradient(135deg, #e0f2fe, #f3e8ff);
-            color: #5b21b6;
+            background: linear-gradient(135deg, #e0f7ff, #ccfbf1);
+            color: #0a3d62;
             padding: 8px 16px;
             border-radius: 20px;
             font-size: 0.9rem;
@@ -105,7 +105,7 @@
 
         .projects {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 30px;
             margin-bottom: 40px;
         }
@@ -131,7 +131,7 @@
             right: 20px;
             width: 50px;
             height: 50px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: linear-gradient(135deg, #64ffda, #0072ff);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -149,7 +149,7 @@
         }
 
         .project-subtitle {
-            color: #667eea;
+            color: #0072ff;
             font-weight: 600;
             margin-bottom: 15px;
             font-size: 1.1rem;
@@ -198,8 +198,8 @@
         }
 
         .tech-tag {
-            background: linear-gradient(135deg, #e0e7ff, #f3e8ff);
-            color: #5b21b6;
+            background: linear-gradient(135deg, #e0f7ff, #ccfbf1);
+            color: #0a3d62;
             padding: 6px 14px;
             border-radius: 12px;
             font-size: 0.85rem;
@@ -256,7 +256,7 @@
 
         .contact-btn {
             padding: 14px 30px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: linear-gradient(135deg, #0072ff, #00b4d8);
             color: white;
             text-decoration: none;
             border-radius: 10px;
@@ -269,7 +269,13 @@
 
         .contact-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 5px 20px rgba(0, 114, 255, 0.4);
+        }
+
+        @media (max-width: 1024px) {
+            .projects {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
         @media (max-width: 768px) {
@@ -824,6 +830,95 @@
                     <span class="tech-tag">PostgreSQL</span>
                 </div>
                 <a href="https://github.com/rabensour/portfolio/tree/main/projects/torah-study" class="project-code-btn" target="_blank">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+                    View Code
+                </a>
+            </div>
+
+            <!-- Task Manager Full Stack -->
+            <div class="project">
+                <div class="project-number">18</div>
+                <h3 class="project-title">📝 Task Manager Full Stack</h3>
+                <p class="project-subtitle">Complete Task Management App</p>
+                <p class="project-description">
+                    Full-stack task management application with authentication, real-time updates and team collaboration. React frontend with Node.js/Express backend and MongoDB.
+                </p>
+                <div class="features">
+                    <h4>Key Features:</h4>
+                    <ul>
+                        <li>JWT authentication system</li>
+                        <li>Real-time task updates</li>
+                        <li>User & team management</li>
+                        <li>REST API with Express</li>
+                    </ul>
+                </div>
+                <div class="tech-tags">
+                    <span class="tech-tag">React</span>
+                    <span class="tech-tag">Node.js</span>
+                    <span class="tech-tag">MongoDB</span>
+                    <span class="tech-tag">Express</span>
+                    <span class="tech-tag">JWT</span>
+                </div>
+                <a href="https://github.com/rabensour/portfolio/tree/main/projects/portfolio/01-TaskManager-FullStack" class="project-code-btn" target="_blank">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+                    View Code
+                </a>
+            </div>
+
+            <!-- Analytics Dashboard -->
+            <div class="project">
+                <div class="project-number">19</div>
+                <h3 class="project-title">📊 Analytics Dashboard</h3>
+                <p class="project-subtitle">Data Visualization Dashboard</p>
+                <p class="project-description">
+                    Interactive analytics dashboard with rich data visualizations. Line charts, bar charts and doughnut charts powered by Chart.js with mock data and responsive layout.
+                </p>
+                <div class="features">
+                    <h4>Key Features:</h4>
+                    <ul>
+                        <li>Multi-chart visualizations</li>
+                        <li>Real-time data simulation</li>
+                        <li>Responsive grid layout</li>
+                        <li>Interactive stat cards</li>
+                    </ul>
+                </div>
+                <div class="tech-tags">
+                    <span class="tech-tag">React</span>
+                    <span class="tech-tag">Chart.js</span>
+                    <span class="tech-tag">JavaScript</span>
+                    <span class="tech-tag">CSS Grid</span>
+                </div>
+                <a href="https://github.com/rabensour/portfolio/tree/main/projects/portfolio/02-Analytics-Dashboard" class="project-code-btn" target="_blank">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+                    View Code
+                </a>
+            </div>
+
+            <!-- E-commerce API -->
+            <div class="project">
+                <div class="project-number">20</div>
+                <h3 class="project-title">🛒 E-commerce API</h3>
+                <p class="project-subtitle">Complete REST API for E-commerce</p>
+                <p class="project-description">
+                    Full-featured e-commerce REST API with products, cart, orders and payments. Includes admin routes, JWT auth, and full CRUD operations for a production-ready backend.
+                </p>
+                <div class="features">
+                    <h4>Key Features:</h4>
+                    <ul>
+                        <li>Products, cart & orders CRUD</li>
+                        <li>JWT + admin authentication</li>
+                        <li>Payment integration ready</li>
+                        <li>Full REST API documentation</li>
+                    </ul>
+                </div>
+                <div class="tech-tags">
+                    <span class="tech-tag">Node.js</span>
+                    <span class="tech-tag">Express</span>
+                    <span class="tech-tag">MongoDB</span>
+                    <span class="tech-tag">JWT</span>
+                    <span class="tech-tag">REST API</span>
+                </div>
+                <a href="https://github.com/rabensour/portfolio/tree/main/projects/portfolio/03-Ecommerce-API" class="project-code-btn" target="_blank">
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
                     View Code
                 </a>
