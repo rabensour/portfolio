@@ -1,0 +1,22 @@
+# Python
+venv/
+.venv/
+env/
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+
+# Node
+node_modules/
+.next/
+dist/
+build/
+
+# Env files with real keys (use .env.example instead)
+.env
+!.env.example
+
+# OS
+.DS_Store
+Thumbs.db
