@@ -3,1023 +3,1370 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Portfolio - Full-Stack Developer</title>
-    <meta name="description" content="Full-Stack Developer specialized in AI - React, Python, Machine Learning">
+    <title>Raphaël Abensour — AI & Full-Stack Developer</title>
+    <meta name="description" content="Full-Stack Developer specialized in AI — React, Python, Machine Learning, Claude AI">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --bg: #080c14;
+            --bg2: #0d1424;
+            --surface: rgba(255,255,255,0.04);
+            --surface-hover: rgba(255,255,255,0.07);
+            --border: rgba(255,255,255,0.08);
+            --border-hover: rgba(100,255,218,0.3);
+            --accent: #64ffda;
+            --accent2: #00b4d8;
+            --accent3: #7c6aff;
+            --text: #e6f1ff;
+            --text2: #8892b0;
+            --text3: #4a5568;
+            --heading: #ccd6f6;
         }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #0a192f 0%, #0d2a45 50%, #0a3d62 100%);
-            min-height: 100vh;
-            padding: 40px 20px;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text2);
+            overflow-x: hidden;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
+        /* Background */
+        .bg-grid {
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(100,255,218,0.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(100,255,218,0.025) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+            z-index: 0;
         }
 
-        header {
-            text-align: center;
-            margin-bottom: 60px;
-            padding: 40px 20px;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.12;
+            pointer-events: none;
+            z-index: 0;
+            animation: orb-float 20s ease-in-out infinite;
         }
 
-        h1 {
-            font-size: 3rem;
-            background: linear-gradient(135deg, #64ffda, #00b4d8, #0072ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 15px;
+        .orb-1 {
+            width: 700px; height: 700px;
+            background: radial-gradient(circle, #64ffda, transparent);
+            top: -250px; right: -250px;
+            animation-delay: 0s;
         }
 
-        .tagline {
-            color: #4a5568;
-            font-size: 1.3rem;
-            margin-bottom: 25px;
+        .orb-2 {
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, #7c6aff, transparent);
+            bottom: 10%; left: -250px;
+            animation-delay: -7s;
         }
 
-        .header-buttons {
+        .orb-3 {
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, #00b4d8, transparent);
+            bottom: -100px; right: 25%;
+            animation-delay: -14s;
+        }
+
+        @keyframes orb-float {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-40px) scale(1.06); }
+        }
+
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+
+        /* Nav */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            padding: 0 48px;
+            height: 72px;
             display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-        }
-
-        .github-btn {
-            display: inline-flex;
             align-items: center;
-            gap: 8px;
-            padding: 12px 24px;
-            background: #24292e;
-            color: white;
-            text-decoration: none;
-            border-radius: 10px;
-            font-weight: 600;
+            justify-content: space-between;
             transition: all 0.3s ease;
         }
 
-        .github-btn:hover {
-            background: #1a1e22;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(36, 41, 46, 0.3);
+        nav.scrolled {
+            background: rgba(8,12,20,0.92);
+            backdrop-filter: blur(24px);
+            border-bottom: 1px solid var(--border);
         }
 
-        .source-note {
+        .nav-logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+        .nav-logo span { color: var(--accent); }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text2);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            transition: color 0.2s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px; left: 0;
+            width: 0; height: 1px;
+            background: var(--accent);
+            transition: width 0.25s;
+        }
+
+        .nav-links a:hover { color: var(--accent); }
+        .nav-links a:hover::after { width: 100%; }
+
+        .nav-cta {
+            padding: 9px 22px;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .nav-cta:hover {
+            background: rgba(100,255,218,0.1);
+            box-shadow: 0 0 24px rgba(100,255,218,0.15);
+        }
+
+        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+        .hamburger span { display: block; width: 24px; height: 2px; background: var(--text); transition: all 0.3s; border-radius: 2px; }
+
+        /* Sections */
+        section { position: relative; z-index: 1; }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 48px; }
+
+        /* Hero */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 120px 48px 80px;
+        }
+
+        .hero-content { max-width: 720px; }
+
+        .hero-greeting {
+            font-family: 'Space Grotesk', sans-serif;
+            color: var(--accent);
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: fade-up 0.6s ease forwards 0.2s;
+        }
+
+        .hero-name {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2.8rem, 6vw, 5rem);
+            font-weight: 700;
+            color: var(--heading);
+            line-height: 1.08;
+            margin-bottom: 16px;
+            opacity: 0;
+            animation: fade-up 0.6s ease forwards 0.4s;
+            letter-spacing: -1px;
+        }
+
+        .hero-tagline {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(1.4rem, 3vw, 2.2rem);
+            font-weight: 500;
+            color: var(--text2);
+            line-height: 1.3;
+            margin-bottom: 28px;
+            opacity: 0;
+            animation: fade-up 0.6s ease forwards 0.6s;
+        }
+
+        .typewriter {
+            color: var(--accent);
+            border-right: 2px solid var(--accent);
+            animation: blink 0.75s step-end infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { border-color: var(--accent); }
+            50% { border-color: transparent; }
+        }
+
+        .hero-desc {
+            font-size: 1.05rem;
+            line-height: 1.85;
+            color: var(--text2);
+            max-width: 580px;
+            margin-bottom: 44px;
+            opacity: 0;
+            animation: fade-up 0.6s ease forwards 0.8s;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            opacity: 0;
+            animation: fade-up 0.6s ease forwards 1s;
+        }
+
+        .btn-primary {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 10px 20px;
-            background: linear-gradient(135deg, #e0f2fe, #dbeafe);
-            color: #1e40af;
-            border-radius: 10px;
+            padding: 14px 30px;
+            background: var(--accent);
+            color: #080c14;
+            border-radius: 8px;
+            font-weight: 700;
             font-size: 0.9rem;
+            text-decoration: none;
+            letter-spacing: 0.3px;
+            transition: all 0.25s;
+        }
+
+        .btn-primary:hover {
+            background: #4ddbb8;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 35px rgba(100,255,218,0.35);
+        }
+
+        .btn-outline {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 30px;
+            border: 1px solid var(--border);
+            color: var(--text);
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: all 0.25s;
+        }
+
+        .btn-outline:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: rgba(100,255,218,0.06);
+            transform: translateY(-2px);
+        }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            color: var(--text3);
+            font-size: 0.7rem;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            opacity: 0;
+            animation: fade-up 0.6s ease forwards 1.4s;
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 55px;
+            background: linear-gradient(to bottom, var(--accent), transparent);
+            animation: scroll-pulse 2.5s ease-in-out infinite;
+        }
+
+        @keyframes scroll-pulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes fade-up {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Stats */
+        #stats {
+            padding: 64px 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--accent);
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 0.78rem;
+            color: var(--text3);
+            text-transform: uppercase;
+            letter-spacing: 2px;
             font-weight: 500;
         }
 
-        .tech-stack {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-            margin-top: 20px;
-        }
-
-        .tech-badge {
-            background: linear-gradient(135deg, #e0f7ff, #ccfbf1);
-            color: #0a3d62;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.9rem;
+        /* Section labels */
+        .section-label {
+            font-family: 'Space Grotesk', sans-serif;
+            color: var(--accent);
+            font-size: 0.8rem;
             font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 14px;
         }
 
-        .projects {
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(1.8rem, 4vw, 2.6rem);
+            font-weight: 700;
+            color: var(--heading);
+            line-height: 1.15;
+            margin-bottom: 14px;
+            letter-spacing: -0.5px;
+        }
+
+        .section-divider {
+            width: 56px;
+            height: 3px;
+            background: linear-gradient(to right, var(--accent), var(--accent2));
+            border-radius: 2px;
+            margin-bottom: 48px;
+        }
+
+        /* About */
+        #about { padding: 110px 0; }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: start;
+        }
+
+        .about-text p {
+            color: var(--text2);
+            line-height: 1.9;
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+
+        .about-text p span { color: var(--accent); font-weight: 600; }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 28px;
+        }
+
+        .skill-group h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--text2);
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+
+        .skill-tag {
+            padding: 5px 13px;
+            background: rgba(100,255,218,0.07);
+            border: 1px solid rgba(100,255,218,0.14);
+            color: var(--accent);
+            border-radius: 4px;
+            font-size: 0.78rem;
+            font-weight: 500;
+            transition: all 0.2s;
+            cursor: default;
+        }
+
+        .skill-tag:hover {
+            background: rgba(100,255,218,0.14);
+            transform: translateY(-1px);
+        }
+
+        /* Projects */
+        #projects { padding: 110px 0; }
+
+        .filter-tabs {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 52px;
+        }
+
+        .filter-tab {
+            padding: 8px 22px;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--text2);
+            border-radius: 100px;
+            font-size: 0.83rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .filter-tab:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .filter-tab.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #080c14;
+            font-weight: 700;
+        }
+
+        .projects-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            margin-bottom: 40px;
+            gap: 20px;
         }
 
-        .project {
-            background: white;
-            border-radius: 20px;
-            padding: 35px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+        .project-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 28px;
             transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
             position: relative;
             overflow: hidden;
         }
 
-        .project:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 60px rgba(0,0,0,0.25);
+        .project-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(100,255,218,0.05), transparent 60%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            border-radius: 16px;
+            pointer-events: none;
         }
 
-        .project-number {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, #64ffda, #0072ff);
-            border-radius: 50%;
+        .project-card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-6px);
+            box-shadow: 0 24px 64px rgba(0,0,0,0.35);
+        }
+
+        .project-card:hover::before { opacity: 1; }
+
+        .project-card.hidden { display: none; }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 18px;
+        }
+
+        .card-icon { font-size: 1.9rem; line-height: 1; }
+
+        .card-links { display: flex; gap: 14px; align-items: center; }
+
+        .card-link {
+            color: var(--text3);
+            transition: color 0.2s, transform 0.2s;
             display: flex;
             align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 1.5rem;
         }
 
-        .project-title {
-            font-size: 1.8rem;
-            color: #2d3748;
-            margin-bottom: 15px;
-            padding-right: 60px;
+        .card-link:hover {
+            color: var(--accent);
+            transform: translateY(-2px);
         }
 
-        .project-subtitle {
-            color: #0072ff;
-            font-weight: 600;
-            margin-bottom: 15px;
+        .card-category {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 8px;
+            opacity: 0.8;
+        }
+
+        .card-title {
+            font-family: 'Space Grotesk', sans-serif;
             font-size: 1.1rem;
-        }
-
-        .project-description {
-            color: #4a5568;
-            line-height: 1.7;
-            margin-bottom: 20px;
-        }
-
-        .features {
-            margin: 20px 0;
-        }
-
-        .features h4 {
-            color: #2d3748;
+            font-weight: 700;
+            color: var(--heading);
             margin-bottom: 10px;
-            font-size: 1rem;
+            line-height: 1.3;
         }
 
-        .features ul {
-            list-style: none;
-            color: #4a5568;
+        .card-desc {
+            font-size: 0.86rem;
+            color: var(--text2);
+            line-height: 1.75;
+            flex: 1;
+            margin-bottom: 22px;
         }
 
-        .features li {
-            padding: 5px 0;
-            padding-left: 25px;
-            position: relative;
-        }
+        .card-tags { display: flex; flex-wrap: wrap; gap: 6px; }
 
-        .features li:before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: #48bb78;
-            font-weight: bold;
-        }
-
-        .tech-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 20px;
-        }
-
-        .tech-tag {
-            background: linear-gradient(135deg, #e0f7ff, #ccfbf1);
-            color: #0a3d62;
-            padding: 6px 14px;
-            border-radius: 12px;
-            font-size: 0.85rem;
+        .card-tag {
+            padding: 3px 10px;
+            background: rgba(124,106,255,0.1);
+            border: 1px solid rgba(124,106,255,0.18);
+            color: #a29bfe;
+            border-radius: 4px;
+            font-size: 0.7rem;
             font-weight: 600;
         }
 
-        .project-code-btn {
+        .card-code-link {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            margin-top: 20px;
-            padding: 10px 20px;
-            background: #24292e;
-            color: white;
+            gap: 6px;
+            margin-top: 18px;
+            color: var(--text2);
             text-decoration: none;
-            border-radius: 8px;
+            font-size: 0.8rem;
             font-weight: 600;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
+            transition: color 0.2s;
         }
 
-        .project-code-btn:hover {
-            background: #1a1e22;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(36, 41, 46, 0.3);
-        }
+        .card-code-link:hover { color: var(--accent); }
 
-        .contact {
-            background: white;
-            border-radius: 20px;
-            padding: 40px;
+        /* Contact */
+        #contact {
+            padding: 110px 0;
             text-align: center;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
         }
 
-        .contact h2 {
-            color: #2d3748;
-            margin-bottom: 20px;
-            font-size: 2rem;
-        }
+        .contact-inner { max-width: 580px; margin: 0 auto; }
 
-        .contact-info {
-            color: #4a5568;
-            font-size: 1.1rem;
-            margin-bottom: 30px;
+        .contact-desc {
+            font-size: 1.05rem;
+            line-height: 1.85;
+            color: var(--text2);
+            margin-bottom: 44px;
         }
 
         .contact-links {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 14px;
             flex-wrap: wrap;
         }
 
-        .contact-btn {
-            padding: 14px 30px;
-            background: linear-gradient(135deg, #0072ff, #00b4d8);
-            color: white;
-            text-decoration: none;
-            border-radius: 10px;
-            font-weight: 600;
-            transition: all 0.3s ease;
+        .contact-link {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 9px;
+            padding: 12px 26px;
+            border: 1px solid var(--border);
+            color: var(--text2);
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.25s;
         }
 
-        .contact-btn:hover {
+        .contact-link:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: rgba(100,255,218,0.05);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 32px 48px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-text { font-size: 0.83rem; color: var(--text3); }
+        .footer-text span { color: var(--accent); }
+
+        /* Back to top */
+        #back-top {
+            position: fixed;
+            bottom: 36px; right: 36px;
+            width: 46px; height: 46px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text2);
+            cursor: pointer;
+            z-index: 50;
+            transition: all 0.25s;
+            opacity: 0;
+            pointer-events: none;
+            backdrop-filter: blur(12px);
+        }
+
+        #back-top.visible { opacity: 1; pointer-events: all; }
+
+        #back-top:hover {
+            border-color: var(--accent);
+            color: var(--accent);
             transform: translateY(-3px);
-            box-shadow: 0 5px 20px rgba(0, 114, 255, 0.4);
         }
 
+        /* Reveal animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.65s ease, transform 0.65s ease;
+        }
+
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* Responsive */
         @media (max-width: 1024px) {
-            .projects {
-                grid-template-columns: repeat(2, 1fr);
-            }
+            .projects-grid { grid-template-columns: repeat(2, 1fr); }
+            .about-grid { grid-template-columns: 1fr; gap: 44px; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; }
         }
 
         @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
+            nav { padding: 0 20px; }
+            .nav-links { display: none; }
+            .nav-links.open {
+                display: flex;
+                flex-direction: column;
+                position: fixed;
+                top: 72px; left: 0; right: 0;
+                background: rgba(8,12,20,0.97);
+                backdrop-filter: blur(20px);
+                padding: 24px;
+                gap: 24px;
+                border-bottom: 1px solid var(--border);
+                z-index: 99;
             }
+            .hamburger { display: flex; }
+            .nav-cta { display: none; }
+            #hero { padding: 100px 20px 80px; }
+            .container { padding: 0 20px; }
+            .projects-grid { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+            .skills-grid { grid-template-columns: 1fr; }
+            .stat-number { font-size: 2.4rem; }
+        }
 
-            .tagline {
-                font-size: 1.1rem;
-            }
-
-            .projects {
-                grid-template-columns: 1fr;
-            }
-
-            .project-title {
-                font-size: 1.5rem;
-            }
+        @media (max-width: 480px) {
+            .hero-buttons { flex-direction: column; }
+            .stats-grid { grid-template-columns: 1fr 1fr; }
         }
     </style>
 </head>
 <body>
+
+<div class="bg-grid"></div>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+
+<!-- NAV -->
+<nav id="navbar">
+    <a href="#" class="nav-logo">RA<span>.</span></a>
+    <ul class="nav-links" id="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="https://github.com/rabensour/portfolio/tree/main/projects" class="nav-cta" target="_blank">GitHub ↗</a>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+        <span></span><span></span><span></span>
+    </button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+    <div class="hero-content">
+        <p class="hero-greeting">Hi, I'm</p>
+        <h1 class="hero-name">Raphaël Abensour</h1>
+        <h2 class="hero-tagline">Building <span class="typewriter" id="typewriter">AI Solutions</span></h2>
+        <p class="hero-desc">
+            Full-Stack Developer specialized in Artificial Intelligence. I build smart,
+            production-ready applications combining modern web tech with cutting-edge AI —
+            Claude API, RAG, ML pipelines, and everything in between.
+        </p>
+        <div class="hero-buttons">
+            <a href="#projects" class="btn-primary">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                View Projects
+            </a>
+            <a href="mailto:shayaben21@gmail.com" class="btn-outline">Get In Touch</a>
+        </div>
+    </div>
+    <div class="hero-scroll">
+        <span>Scroll</span>
+        <div class="scroll-line"></div>
+    </div>
+</section>
+
+<!-- STATS -->
+<section id="stats">
     <div class="container">
-        <header>
-            <h1>🚀 AI & Full-Stack Portfolio</h1>
-            <p class="tagline">Full-Stack Developer specialized in Artificial Intelligence</p>
+        <div class="stats-grid">
+            <div class="reveal">
+                <div class="stat-number" data-target="23">0</div>
+                <div class="stat-label">Projects Built</div>
+            </div>
+            <div class="reveal" style="transition-delay:0.1s">
+                <div class="stat-number" data-target="10">0</div>
+                <div class="stat-label">Tech Stacks</div>
+            </div>
+            <div class="reveal" style="transition-delay:0.2s">
+                <div class="stat-number" data-target="8">0</div>
+                <div class="stat-label">AI Integrations</div>
+            </div>
+            <div class="reveal" style="transition-delay:0.3s">
+                <div class="stat-number" data-target="100">0</div>
+                <div class="stat-label">% Passion</div>
+            </div>
+        </div>
+    </div>
+</section>
 
-            <div class="header-buttons">
-                <a href="https://github.com/rabensour/portfolio" class="github-btn" target="_blank">
-                    <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor">
-                        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
-                    </svg>
-                    View Source Code
-                </a>
-                <span class="source-note">
-                    💻 All project code available on GitHub
-                </span>
+<!-- ABOUT -->
+<section id="about">
+    <div class="container">
+        <div class="reveal">
+            <p class="section-label">About Me</p>
+            <h2 class="section-title">Passionate about AI & code</h2>
+            <div class="section-divider"></div>
+        </div>
+        <div class="about-grid">
+            <div class="about-text reveal">
+                <p>
+                    I'm a <span>Full-Stack Developer</span> based in France, specialized in
+                    building intelligent applications that combine AI capabilities with
+                    clean, performant web development.
+                </p>
+                <p>
+                    My work spans from <span>RAG pipelines</span> and Claude API integrations
+                    to Next.js apps, Chrome extensions, and data automation tools.
+                    I love turning complex AI concepts into real, usable products.
+                </p>
+                <p>
+                    When I'm not building, I'm exploring new AI models, contributing to
+                    open-source, or learning the next tool that'll make me more effective.
+                </p>
+            </div>
+            <div class="skills-grid reveal" style="transition-delay:0.2s">
+                <div class="skill-group">
+                    <h4>Frontend</h4>
+                    <div class="skill-tags">
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">Next.js</span>
+                        <span class="skill-tag">TypeScript</span>
+                        <span class="skill-tag">Tailwind</span>
+                        <span class="skill-tag">Astro.js</span>
+                    </div>
+                </div>
+                <div class="skill-group">
+                    <h4>Backend</h4>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">FastAPI</span>
+                        <span class="skill-tag">Node.js</span>
+                        <span class="skill-tag">Express</span>
+                        <span class="skill-tag">Flask</span>
+                    </div>
+                </div>
+                <div class="skill-group">
+                    <h4>AI / ML</h4>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Claude API</span>
+                        <span class="skill-tag">RAG</span>
+                        <span class="skill-tag">NLP</span>
+                        <span class="skill-tag">ML</span>
+                        <span class="skill-tag">Prompt Eng.</span>
+                    </div>
+                </div>
+                <div class="skill-group">
+                    <h4>Databases & Tools</h4>
+                    <div class="skill-tags">
+                        <span class="skill-tag">MongoDB</span>
+                        <span class="skill-tag">PostgreSQL</span>
+                        <span class="skill-tag">ChromaDB</span>
+                        <span class="skill-tag">Git</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+    <div class="container">
+        <div class="reveal">
+            <p class="section-label">Work</p>
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="section-divider"></div>
+        </div>
+        <div class="filter-tabs reveal">
+            <button class="filter-tab active" data-filter="all">All (23)</button>
+            <button class="filter-tab" data-filter="ai">AI &amp; ML</button>
+            <button class="filter-tab" data-filter="web">Full-Stack</button>
+            <button class="filter-tab" data-filter="tools">Data &amp; Tools</button>
+        </div>
+        <div class="projects-grid" id="projects-grid">
+
+            <!-- 1. Newsletter App -->
+            <div class="project-card reveal" data-category="ai web">
+                <div class="card-header">
+                    <span class="card-icon">📰</span>
+                    <a href="https://github.com/rabensour/portfolio/tree/main/projects/newsletter-app" class="card-code-link" target="_blank" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> View Code →</a>
+                </div>
+                <div class="card-category">AI &amp; ML · Full-Stack</div>
+                <h3 class="card-title">Newsletter App</h3>
+                <p class="card-desc">AI-powered digital magazine that transforms emails into elegantly formatted content with intelligent categorization and summarization.</p>
+                <div class="card-tags">
+                    <span class="card-tag">React 19</span>
+                    <span class="card-tag">FastAPI</span>
+                    <span class="card-tag">Claude AI</span>
+                    <span class="card-tag">SQLite</span>
+                </div>
             </div>
 
-        </header>
-
-        <div class="projects">
-            <!-- Newsletter App -->
-            <div class="project">
-                <div class="project-number">1</div>
-                <h3 class="project-title">Newsletter App</h3>
-                <p class="project-subtitle">AI-Powered Digital Magazine</p>
-                <p class="project-description">
-                    Full-stack web application that automatically transforms your emails into an elegant digital magazine.
-                    Uses AI to intelligently categorize, summarize, and format content.
-                </p>
-                <div class="features">
-                    <h4>Key Features:</h4>
-                    <ul>
-                        <li>Automatic email processing</li>
-                        <li>Intelligent AI categorization</li>
-                        <li>Modern magazine interface (React 19)</li>
-                        <li>Complete REST API (FastAPI)</li>
-                    </ul>
+            <!-- 2. Veo3 Analyzer -->
+            <div class="project-card reveal" data-category="ai" style="transition-delay:0.05s">
+                <div class="card-header">
+                    <span class="card-icon">🎬</span>
+                    <a href="https://github.com/rabensour/portfolio/tree/main/projects/veo3-analyzer" class="card-code-link" target="_blank" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> View Code →</a>
                 </div>
-                <div class="tech-tags">
-                    <span class="tech-tag">React 19</span>
-                    <span class="tech-tag">FastAPI</span>
-                    <span class="tech-tag">Claude AI</span>
-                    <span class="tech-tag">SQLite</span>
-                    <span class="tech-tag">REST API</span>
+                <div class="card-category">AI &amp; ML</div>
+                <h3 class="card-title">Veo3 Analyzer</h3>
+                <p class="card-desc">ML system to optimize prompts for Google's Veo3 AI video generator. Uses pattern detection and ML scoring to recommend the best prompts.</p>
+                <div class="card-tags">
+                    <span class="card-tag">Python</span>
+                    <span class="card-tag">Flask</span>
+                    <span class="card-tag">ML</span>
+                    <span class="card-tag">NLP</span>
                 </div>
-                <a href="https://github.com/rabensour/portfolio/tree/main/projects/newsletter-app" class="project-code-btn" target="_blank">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
-                    </svg>
-                    View Code
-                </a>
             </div>
 
-            <!-- Veo3 Analyzer -->
-            <div class="project">
-                <div class="project-number">2</div>
-                <h3 class="project-title">Veo3 Analyzer</h3>
-                <p class="project-subtitle">ML-Powered Video Prompt Optimization</p>
-                <p class="project-description">
-                    Machine Learning system to optimize prompts for Veo3 (Google's AI video generator).
-                    Uses pattern detection and ML algorithms to recommend the best prompts.
-                </p>
-                <div class="features">
-                    <h4>Key Features:</h4>
-                    <ul>
-                        <li>Automatic pattern detection</li>
-                        <li>ML scoring algorithm</li>
-                        <li>Intelligent recommendations</li>
-                        <li>Modern Flask web interface</li>
-                    </ul>
+            <!-- 3. Media MCP -->
+            <div class="project-card reveal" data-category="tools" style="transition-delay:0.1s">
+                <div class="card-header">
+                    <span class="card-icon">🎵</span>
+                    <a href="https://github.com/rabensour/portfolio/tree/main/projects/media-mcp" class="card-code-link" target="_blank" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> View Code →</a>
                 </div>
-                <div class="tech-tags">
-                    <span class="tech-tag">Python</span>
-                    <span class="tech-tag">Flask</span>
-                    <span class="tech-tag">Machine Learning</span>
-                    <span class="tech-tag">Pattern Detection</span>
-                    <span class="tech-tag">NLP</span>
+                <div class="card-category">Data &amp; Tools</div>
+                <h3 class="card-title">Media MCP</h3>
+                <p class="card-desc">MCP servers enabling YouTube and Spotify control directly from Claude Desktop in natural language. "Play jazz on Spotify" — done instantly.</p>
+                <div class="card-tags">
+                    <span class="card-tag">Python</span>
+                    <span class="card-tag">MCP Protocol</span>
+                    <span class="card-tag">YouTube API</span>
+                    <span class="card-tag">Spotify API</span>
                 </div>
-                <a href="https://github.com/rabensour/portfolio/tree/main/projects/veo3-analyzer" class="project-code-btn" target="_blank">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
-                    </svg>
-                    View Code
-                </a>
             </div>
 
-            <!-- Media MCP -->
-            <div class="project">
-                <div class="project-number">3</div>
-                <h3 class="project-title">🎵 Media MCP</h3>
-                <p class="project-subtitle">Voice-Controlled YouTube & Spotify via AI</p>
-                <p class="project-description">
-                    Innovative MCP servers enabling YouTube and Spotify control directly from Claude Desktop
-                    in natural language. "Play jazz on Spotify" or "find a video about React" - done!
-                </p>
-                <div class="features">
-                    <h4>Key Features:</h4>
-                    <ul>
-                        <li>Conversational YouTube control</li>
-                        <li>Natural language Spotify management</li>
-                        <li>Claude Desktop integration (MCP Protocol)</li>
-                        <li>Complete YouTube & Spotify APIs</li>
-                    </ul>
+            <!-- 4. AI Coach -->
+            <div class="project-card reveal" data-category="ai web">
+                <div class="card-header">
+                    <span class="card-icon">🧠</span>
+                    <a href="https://github.com/rabensour/portfolio/tree/main/projects/ai-coach" class="card-code-link" target="_blank" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> View Code →</a>
                 </div>
-                <div class="tech-tags">
-                    <span class="tech-tag">Python</span>
-                    <span class="tech-tag">MCP Protocol</span>
-                    <span class="tech-tag">YouTube API</span>
-                    <span class="tech-tag">Spotify API</span>
-                    <span class="tech-tag">Claude Desktop</span>
+                <div class="card-category">AI &amp; ML · Full-Stack</div>
+                <h3 class="card-title">AI Personal Coach</h3>
+                <p class="card-desc">Personal AI coach using RAG to learn from your own documents. Get personalized advice and answers grounded in your custom knowledge base.</p>
+                <div class="card-tags">
+                    <span class="card-tag">Python</span>
+                    <span class="card-tag">RAG</span>
+                    <span class="card-tag">FastAPI</span>
+                    <span class="card-tag">Claude AI</span>
+                    <span class="card-tag">React</span>
                 </div>
-                <a href="https://github.com/rabensour/portfolio/tree/main/projects/media-mcp" class="project-code-btn" target="_blank">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
-                    </svg>
-                    View Code
-                </a>
             </div>
 
-            <!-- AI Coach -->
-            <div class="project">
-                <div class="project-number">4</div>
-                <h3 class="project-title">🧠 AI Personal Coach</h3>
-                <p class="project-subtitle">RAG-Powered Personal Assistant</p>
-                <p class="project-description">
-                    Personal AI coach that learns from your own documents using RAG. Ask questions, get personalized advice and answers based on your own knowledge base.
-                </p>
-                <div class="features">
-                    <h4>Key Features:</h4>
-                    <ul>
-                        <li>RAG (Retrieval-Augmented Generation)</li>
-                        <li>Custom document ingestion</li>
-                        <li>Personalized AI responses</li>
-                        <li>FastAPI + React frontend</li>
-                    </ul>
+            <!-- 5. Airbnb Data Extractor -->
+            <div class="project-card reveal" data-category="tools" style="transition-delay:0.05s">
+                <div class="card-header">
+                    <span class="card-icon">🏠</span>
+                    <a href="https://github.com/rabensour/portfolio/tree/main/projects/airbnb-data-extractor" class="card-code-link" target="_blank" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> View Code →</a>
                 </div>
-                <div class="tech-tags">
-                    <span class="tech-tag">Python</span>
-                    <span class="tech-tag">RAG</span>
-                    <span class="tech-tag">FastAPI</span>
-                    <span class="tech-tag">Claude AI</span>
-                    <span class="tech-tag">React</span>
+                <div class="card-category">Chrome Extension · Data &amp; Tools</div>
+                <h3 class="card-title">Airbnb Data Extractor</h3>
+                <p class="card-desc">Chrome extension that extracts Airbnb listing data in one click — prices, availability, descriptions. Exports to JSON/CSV for analysis.</p>
+                <div class="card-tags">
+                    <span class="card-tag">JavaScript</span>
+                    <span class="card-tag">Chrome Ext.</span>
+                    <span class="card-tag">Manifest V3</span>
                 </div>
-                <a href="https://github.com/rabensour/portfolio/tree/main/projects/ai-coach" class="project-code-btn" target="_blank">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-                    View Code
-                </a>
             </div>
 
-            <!-- Airbnb Data Extractor -->
-            <div class="project">
-                <div class="project-number">5</div>
-                <h3 class="project-title">🏠 Airbnb Data Extractor</h3>
-                <p class="project-subtitle">Chrome Extension for Airbnb Hosts</p>
-                <p class="project-description">
-                    Chrome extension that extracts listing data from Airbnb in one click — prices, availability, descriptions. Exports to JSON/CSV for analysis.
-                </p>
-                <div class="features">
-                    <h4>Key Features:</h4>
-                    <ul>
-                        <li>One-click data extraction</li>
-                        <li>Prices & availability scraping</li>
-                        <li>JSON/CSV export</li>
-                        <li>Side panel UI</li>
-                    </ul>
+            <!-- 6. Airbnb Reviews Analyser -->
+            <div class="project-card reveal" data-category="ai" style="transition-delay:0.1s">
+                <div class="card-header">
+                    <span class="card-icon">⭐</span>
+                    <a href="https://github.com/rabensour/portfolio/tree/main/projects/airbnb-reviews" class="card-code-link" target="_blank" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> View Code →</a>
                 </div>
-                <div class="tech-tags">
-                    <span class="tech-tag">JavaScript</span>
-                    <span class="tech-tag">Chrome Extension</span>
-                    <span class="tech-tag">Manifest V3</span>
-                    <span class="tech-tag">Airbnb API</span>
+                <div class="card-category">AI &amp; ML</div>
+                <h3 class="card-title">Airbnb Reviews Analyser</h3>
+                <p class="card-desc">NLP-powered review analysis that extracts sentiment, recurring themes, and generates actionable host recommendations automatically.</p>
+                <div class="card-tags">
+                    <span class="card-tag">Python</span>
+                    <span class="card-tag">NLP</span>
+                    <span class="card-tag">Claude AI</span>
                 </div>
-                <a href="https://github.com/rabensour/portfolio/tree/main/projects/airbnb-data-extractor" class="project-code-btn" target="_blank">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-                    View Code
-                </a>
             </div>
 
-            <!-- Airbnb Reviews Analyser -->
-            <div class="project">
-                <div class="project-number">6</div>
-                <h3 class="project-title">⭐ Airbnb Reviews Analyser</h3>
-                <p class="project-subtitle">NLP-Powered Review Analysis</p>
-                <p class="project-description">
-                    Analyzes and synthesizes Airbnb reviews automatically using NLP. Extracts sentiment, recurring themes, and generates actionable host recommendations.
-                </p>
-                <div class="features">
-                    <h4>Key Features:</h4>
-                    <ul>
-                        <li>Sentiment analysis per review</li>
-                        <li>Theme extraction & clustering</li>
-                        <li>Actionable host recommendations</li>
-                        <li>JSON data processing</li>
-                    </ul>
+            <!-- 7. Astro App -->
+            <div class="project-card reveal" data-category="web">
+                <div class="card-header">
+                    <span class="card-icon">🚀</span>
+                    <a href="https://github.com/rabensour/portfolio/tree/main/projects/astro-app" class="card-code-link" target="_blank" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> View Code →</a>
                 </div>
-                <div class="tech-tags">
-                    <span class="tech-tag">Python</span>
-                    <span class="tech-tag">NLP</span>
-                    <span class="tech-tag">Claude AI</span>
-                    <span class="tech-tag">JSON</span>
+                <div class="card-category">Full-Stack</div>
+                <h3 class="card-title">Astro App</h3>
+                <p class="card-desc">High-performance web app using Astro.js island architecture with React components and Express.js backend. Optimized for speed.</p>
+                <div class="card-tags">
+                    <span class="card-tag">Astro.js</span>
+                    <span class="card-tag">React</span>
+                    <span class="card-tag">Tailwind</span>
+                    <span class="card-tag">Express</span>
                 </div>
-                <a href="https://github.com/rabensour/portfolio/tree/main/projects/airbnb-reviews" class="project-code-btn" target="_blank">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-                    View Code
-                </a>
             </div>
 
-            <!-- Astro App -->
-            <div class="project">
-                <div class="project-number">7</div>
-                <h3 class="project-title">🚀 Astro App</h3>
-                <p class="project-subtitle">High-Performance Web Application</p>
-                <p class="project-description">
-                    Fast, modern web application built with Astro.js, React and Tailwind CSS. Optimized for performance with static generation and island architecture.
-                </p>
-                <div class="features">
-                    <h4>Key Features:</h4>
-                    <ul>
-                        <li>Island architecture (Astro)</li>
-                        <li>React components integration</li>
-                        <li>Express.js backend server</li>
-                        <li>Tailwind CSS styling</li>
-                    </ul>
+            <!-- 8. Books Extractor -->
+            <div class="project-card reveal" data-category="tools" style="transition-delay:0.05s">
+                <div class="card-header">
+                    <span class="card-icon">📚</span>
+                    <a href="https://github.com/rabensour/portfolio/tree/main/projects/books-extractor" class="card-code-link" target="_blank" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> View Code →</a>
                 </div>
-                <div class="tech-tags">
-                    <span class="tech-tag">Astro.js</span>
-                    <span class="tech-tag">React</span>
-                    <span class="tech-tag">Tailwind CSS</span>
-                    <span class="tech-tag">Express</span>
+                <div class="card-category">Data &amp; Tools</div>
+                <h3 class="card-title">Books Extractor</h3>
+                <p class="card-desc">Automated book data pipeline that scrapes metadata, covers and descriptions then syncs structured data directly to a custom Airtable base.</p>
+                <div class="card-tags">
+                    <span class="card-tag">Python</span>
+                    <span class="card-tag">Airtable API</span>
+                    <span class="card-tag">Web Scraping</span>
                 </div>
-                <a href="https://github.com/rabensour/portfolio/tree/main/projects/astro-app" class="project-code-btn" target="_blank">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-                    View Code
-                </a>
             </div>
 
-            <!-- Books Extractor -->
-            <div class="project">
-                <div class="project-number">8</div>
-                <h3 class="project-title">📚 Books Extractor</h3>
-                <p class="project-subtitle">Book Data Pipeline to Airtable</p>
-                <p class="project-description">
-                    Extracts book data and syncs it to Airtable automatically. Scrapes metadata, covers, and descriptions then pushes structured data to a custom Airtable base.
-                </p>
-                <div class="features">
-                    <h4>Key Features:</h4>
-                    <ul>
-                        <li>Automated book metadata extraction</li>
-                        <li>Airtable API integration</li>
-                        <li>Cover image processing</li>
-                        <li>Batch processing pipeline</li>
-                    </ul>
+            <!-- 9. CV Tools -->
+            <div class="project-card reveal" data-category="ai" style="transition-delay:0.1s">
+                <div class="card-header">
+                    <span class="card-icon">📄</span>
+                    <a href="https://github.com/rabensour/portfolio/tree/main/projects/cv-tools" class="card-code-link" target="_blank" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> View Code →</a>
                 </div>
-                <div class="tech-tags">
-                    <span class="tech-tag">Python</span>
-                    <span class="tech-tag">Airtable API</span>
-                    <span class="tech-tag">Web Scraping</span>
-                    <span class="tech-tag">Data Pipeline</span>
+                <div class="card-category">AI &amp; ML</div>
+                <h3 class="card-title">CV Tools</h3>
+                <p class="card-desc">AI suite to analyze CVs against job offers. Scores compatibility, highlights skill gaps, and suggests improvements with Claude AI.</p>
+                <div class="card-tags">
+                    <span class="card-tag">JavaScript</span>
+                    <span class="card-tag">NLP</span>
+                    <span class="card-tag">Claude AI</span>
                 </div>
-                <a href="https://github.com/rabensour/portfolio/tree/main/projects/books-extractor" class="project-code-btn" target="_blank">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-                    View Code
-                </a>
             </div>
 
-            <!-- CV Tools -->
-            <div class="project">
-                <div class="project-number">9</div>
-                <h3 class="project-title">📄 CV Tools</h3>
-                <p class="project-subtitle">AI-Powered Resume Analyzer & Matcher</p>
-                <p class="project-description">
-                    Suite of tools to analyze CVs and match them against job offers. Uses AI to score compatibility, highlight gaps, and suggest improvements.
-                </p>
-                <div class="features">
-                    <h4>Key Features:</h4>
-                    <ul>
-                        <li>CV vs job offer matching score</li>
-                        <li>Skills gap analysis</li>
-                        <li>Web adapter interface</li>
-                        <li>AI-powered recommendations</li>
-                    </ul>
+            <!-- 10. Dentist -->
+            <div class="project-card reveal" data-category="web">
+                <div class="card-header">
+                    <span class="card-icon">🦷</span>
+                    <a href="https://github.com/rabensour/portfolio/tree/main/projects/dentist" class="card-code-link" target="_blank" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> View Code →</a>
                 </div>
-                <div class="tech-tags">
-                    <span class="tech-tag">JavaScript</span>
-                    <span class="tech-tag">NLP</span>
-                    <span class="tech-tag">Claude AI</span>
-                    <span class="tech-tag">HTML/CSS</span>
+                <div class="card-category">Full-Stack</div>
+                <h3 class="card-title">Cabinet Dentaire</h3>
+                <p class="card-desc">Professional dental practice website with online appointment booking, services pages, and emergency contact. Fully responsive modern design.</p>
+                <div class="card-tags">
+                    <span class="card-tag">Next.js 15</span>
+                    <span class="card-tag">TypeScript</span>
+                    <span class="card-tag">Tailwind</span>
                 </div>
-                <a href="https://github.com/rabensour/portfolio/tree/main/projects/cv-tools" class="project-code-btn" target="_blank">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-                    View Code
-                </a>
             </div>
 
-            <!-- Dentist -->
-            <div class="project">
-                <div class="project-number">10</div>
-                <h3 class="project-title">🦷 Cabinet Dentaire</h3>
-                <p class="project-subtitle">Professional Dental Practice Website</p>
-                <p class="project-description">
-                    Full professional website for a dental practice — Dr. Abensour. Modern design with appointment booking, services pages, and emergency contact.
-                </p>
-                <div class="features">
-                    <h4>Key Features:</h4>
-                    <ul>
-                        <li>Online appointment booking form</li>
-                        <li>Services & care pages</li>
-                        <li>Emergency contact page</li>
-                        <li>Fully responsive design</li>
-                    </ul>
+            <!-- 11. Dreams Interpreter -->
+            <div class="project-card reveal" data-category="ai" style="transition-delay:0.05s">
+                <div class="card-header">
+                    <span class="card-icon">💤</span>
+                    <a href="https://github.com/rabensour/portfolio/tree/main/projects/dreams-interpreter" class="card-code-link" target="_blank" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> View Code →</a>
                 </div>
-                <div class="tech-tags">
-                    <span class="tech-tag">Next.js 15</span>
-                    <span class="tech-tag">TypeScript</span>
-                    <span class="tech-tag">Tailwind CSS</span>
-                    <span class="tech-tag">React</span>
+                <div class="card-category">AI &amp; ML</div>
+                <h3 class="card-title">Dreams Interpreter</h3>
+                <p class="card-desc">AI-powered dream interpreter that analyzes symbolic and psychological meanings based on Jungian and modern psychology frameworks.</p>
+                <div class="card-tags">
+                    <span class="card-tag">HTML/JS</span>
+                    <span class="card-tag">Claude AI</span>
                 </div>
-                <a href="https://github.com/rabensour/portfolio/tree/main/projects/dentist" class="project-code-btn" target="_blank">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-                    View Code
-                </a>
             </div>
 
-            <!-- Dreams Interpreter -->
-            <div class="project">
-                <div class="project-number">11</div>
-                <h3 class="project-title">💤 Dreams Interpreter</h3>
-                <p class="project-subtitle">AI Dream Analysis Tool</p>
-                <p class="project-description">
-                    AI-powered dream interpreter that analyzes symbolic and psychological meanings. Describe your dream and receive a detailed interpretation based on Jungian and modern psychology.
-                </p>
-                <div class="features">
-                    <h4>Key Features:</h4>
-                    <ul>
-                        <li>Symbolic dream analysis</li>
-                        <li>Psychological interpretation</li>
-                        <li>Single-file HTML app</li>
-                        <li>Claude AI integration</li>
-                    </ul>
+            <!-- 12. Email Tools -->
+            <div class="project-card reveal" data-category="web tools" style="transition-delay:0.1s">
+                <div class="card-header">
+                    <span class="card-icon">📧</span>
+                    <a href="https://github.com/rabensour/portfolio/tree/main/projects/email-tools" class="card-code-link" target="_blank" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> View Code →</a>
                 </div>
-                <div class="tech-tags">
-                    <span class="tech-tag">HTML</span>
-                    <span class="tech-tag">JavaScript</span>
-                    <span class="tech-tag">Claude AI</span>
-                    <span class="tech-tag">CSS</span>
+                <div class="card-category">Full-Stack · Data &amp; Tools</div>
+                <h3 class="card-title">Email Tools</h3>
+                <p class="card-desc">Outlook automation suite — inbox cleaner, smart rules engine, and a Next.js web app to manage and automate your inbox at scale.</p>
+                <div class="card-tags">
+                    <span class="card-tag">Next.js</span>
+                    <span class="card-tag">TypeScript</span>
+                    <span class="card-tag">Outlook API</span>
                 </div>
-                <a href="https://github.com/rabensour/portfolio/tree/main/projects/dreams-interpreter" class="project-code-btn" target="_blank">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-                    View Code
-                </a>
             </div>
 
-            <!-- Email Tools -->
-            <div class="project">
-                <div class="project-number">12</div>
-                <h3 class="project-title">📧 Email Tools</h3>
-                <p class="project-subtitle">Outlook Automation & Email Management Suite</p>
-                <p class="project-description">
-                    Suite of email productivity tools — Outlook cleaner, smart rules engine, and a Next.js web app to manage and automate your inbox at scale.
-                </p>
-                <div class="features">
-                    <h4>Key Features:</h4>
-                    <ul>
-                        <li>Outlook inbox cleaner</li>
-                        <li>Smart automation rules</li>
-                        <li>Web app dashboard</li>
-                        <li>Bulk email management</li>
-                    </ul>
+            <!-- 13. Formation IA 2026 -->
+            <div class="project-card reveal" data-category="ai">
+                <div class="card-header">
+                    <span class="card-icon">🎓</span>
+                    <a href="https://github.com/rabensour/portfolio/tree/main/projects/formation-ia-2026" class="card-code-link" target="_blank" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> View Code →</a>
                 </div>
-                <div class="tech-tags">
-                    <span class="tech-tag">Next.js</span>
-                    <span class="tech-tag">TypeScript</span>
-                    <span class="tech-tag">Outlook API</span>
-                    <span class="tech-tag">React</span>
+                <div class="card-category">AI &amp; ML</div>
+                <h3 class="card-title">Formation IA 2026</h3>
+                <p class="card-desc">Structured AI training program covering prompt engineering, Claude API, RAG, agents, and real-world applications with hands-on projects.</p>
+                <div class="card-tags">
+                    <span class="card-tag">Python</span>
+                    <span class="card-tag">Claude API</span>
+                    <span class="card-tag">RAG</span>
+                    <span class="card-tag">Prompt Eng.</span>
                 </div>
-                <a href="https://github.com/rabensour/portfolio/tree/main/projects/email-tools" class="project-code-btn" target="_blank">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-                    View Code
-                </a>
             </div>
 
-            <!-- Formation IA 2026 -->
-            <div class="project">
-                <div class="project-number">13</div>
-                <h3 class="project-title">🎓 Formation IA 2026</h3>
-                <p class="project-subtitle">Complete AI Training Program</p>
-                <p class="project-description">
-                    Structured AI training program with modules, hands-on projects and curated resources. Covers prompt engineering, Claude API, RAG, agents and real-world applications.
-                </p>
-                <div class="features">
-                    <h4>Key Features:</h4>
-                    <ul>
-                        <li>Structured learning modules</li>
-                        <li>Hands-on projects</li>
-                        <li>Prompt engineering techniques</li>
-                        <li>Claude API & agent building</li>
-                    </ul>
+            <!-- 14. Malt Analyzer -->
+            <div class="project-card reveal" data-category="ai tools" style="transition-delay:0.05s">
+                <div class="card-header">
+                    <span class="card-icon">💼</span>
+                    <a href="https://github.com/rabensour/portfolio/tree/main/projects/malt-analyzer" class="card-code-link" target="_blank" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> View Code →</a>
                 </div>
-                <div class="tech-tags">
-                    <span class="tech-tag">Python</span>
-                    <span class="tech-tag">Claude API</span>
-                    <span class="tech-tag">Prompt Engineering</span>
-                    <span class="tech-tag">RAG</span>
+                <div class="card-category">AI &amp; ML · Data &amp; Tools</div>
+                <h3 class="card-title">Malt Analyzer</h3>
+                <p class="card-desc">Freelance market intelligence for Malt.fr — analyzes market rates, skills demand, and competitive positioning to optimize freelancer profiles.</p>
+                <div class="card-tags">
+                    <span class="card-tag">Python</span>
+                    <span class="card-tag">Web Scraping</span>
+                    <span class="card-tag">Claude AI</span>
                 </div>
-                <a href="https://github.com/rabensour/portfolio/tree/main/projects/formation-ia-2026" class="project-code-btn" target="_blank">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-                    View Code
-                </a>
             </div>
 
-            <!-- Malt Analyzer -->
-            <div class="project">
-                <div class="project-number">14</div>
-                <h3 class="project-title">💼 Malt Analyzer</h3>
-                <p class="project-subtitle">Freelance Market Intelligence Tool</p>
-                <p class="project-description">
-                    Analyzes freelance profiles and missions on Malt.fr — market rates, skills demand, and competitive positioning. Helps freelancers optimize their profile and pricing.
-                </p>
-                <div class="features">
-                    <h4>Key Features:</h4>
-                    <ul>
-                        <li>Market rate analysis</li>
-                        <li>Skills demand tracking</li>
-                        <li>Profile competitive scoring</li>
-                        <li>Data visualization</li>
-                    </ul>
+            <!-- 15. Prompt Optimizer -->
+            <div class="project-card reveal" data-category="ai" style="transition-delay:0.1s">
+                <div class="card-header">
+                    <span class="card-icon">✨</span>
+                    <a href="https://github.com/rabensour/portfolio/tree/main/projects/prompt-optimizer" class="card-code-link" target="_blank" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> View Code →</a>
                 </div>
-                <div class="tech-tags">
-                    <span class="tech-tag">Python</span>
-                    <span class="tech-tag">Web Scraping</span>
-                    <span class="tech-tag">Analytics</span>
-                    <span class="tech-tag">Claude AI</span>
+                <div class="card-category">AI &amp; ML</div>
+                <h3 class="card-title">Prompt Optimizer</h3>
+                <p class="card-desc">AI prompt engineering tool that scores quality (0–10) and suggests improvements for better AI responses. Includes before/after comparison.</p>
+                <div class="card-tags">
+                    <span class="card-tag">HTML/JS</span>
+                    <span class="card-tag">Claude AI</span>
                 </div>
-                <a href="https://github.com/rabensour/portfolio/tree/main/projects/malt-analyzer" class="project-code-btn" target="_blank">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-                    View Code
-                </a>
             </div>
 
-            <!-- Prompt Optimizer -->
-            <div class="project">
-                <div class="project-number">15</div>
-                <h3 class="project-title">✨ Prompt Optimizer</h3>
-                <p class="project-subtitle">AI Prompt Engineering Tool</p>
-                <p class="project-description">
-                    Tool to optimize and improve AI prompts. Analyzes your prompt, scores its quality, and suggests improvements to get better, more precise AI responses.
-                </p>
-                <div class="features">
-                    <h4>Key Features:</h4>
-                    <ul>
-                        <li>Prompt quality scoring (0-10)</li>
-                        <li>Optimization suggestions</li>
-                        <li>Before/after comparison</li>
-                        <li>Single-file HTML app</li>
-                    </ul>
+            <!-- 16. Sports Analyser -->
+            <div class="project-card reveal" data-category="ai">
+                <div class="card-header">
+                    <span class="card-icon">⚽</span>
+                    <a href="https://github.com/rabensour/portfolio/tree/main/projects/sports-analyser" class="card-code-link" target="_blank" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> View Code →</a>
                 </div>
-                <div class="tech-tags">
-                    <span class="tech-tag">HTML</span>
-                    <span class="tech-tag">JavaScript</span>
-                    <span class="tech-tag">Claude AI</span>
-                    <span class="tech-tag">CSS</span>
+                <div class="card-category">AI &amp; ML</div>
+                <h3 class="card-title">Sports Analyser</h3>
+                <p class="card-desc">Claude AI-powered sports performance analyser. Processes match data and player stats to generate in-depth tactical analysis and insights.</p>
+                <div class="card-tags">
+                    <span class="card-tag">TypeScript</span>
+                    <span class="card-tag">Express.js</span>
+                    <span class="card-tag">Claude AI</span>
                 </div>
-                <a href="https://github.com/rabensour/portfolio/tree/main/projects/prompt-optimizer" class="project-code-btn" target="_blank">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-                    View Code
-                </a>
             </div>
 
-            <!-- Sports Analyser -->
-            <div class="project">
-                <div class="project-number">16</div>
-                <h3 class="project-title">⚽ Sports Analyser</h3>
-                <p class="project-subtitle">AI-Powered Sports Performance Analysis</p>
-                <p class="project-description">
-                    Sports performance analyser powered by Claude AI. Processes match data, player stats and generates in-depth tactical analysis and performance insights.
-                </p>
-                <div class="features">
-                    <h4>Key Features:</h4>
-                    <ul>
-                        <li>AI tactical analysis</li>
-                        <li>Player performance stats</li>
-                        <li>Match data processing</li>
-                        <li>Express.js REST API</li>
-                    </ul>
+            <!-- 17. Torah Study -->
+            <div class="project-card reveal" data-category="web" style="transition-delay:0.05s">
+                <div class="card-header">
+                    <span class="card-icon">📖</span>
+                    <a href="https://github.com/rabensour/portfolio/tree/main/projects/torah-study" class="card-code-link" target="_blank" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> View Code →</a>
                 </div>
-                <div class="tech-tags">
-                    <span class="tech-tag">TypeScript</span>
-                    <span class="tech-tag">Express.js</span>
-                    <span class="tech-tag">Claude AI</span>
-                    <span class="tech-tag">Node.js</span>
+                <div class="card-category">Full-Stack</div>
+                <h3 class="card-title">Torah Study App</h3>
+                <p class="card-desc">Full-stack Jewish learning platform with texts, commentaries, advanced search, and personalized learning tracking. React + Node.js + PostgreSQL.</p>
+                <div class="card-tags">
+                    <span class="card-tag">React</span>
+                    <span class="card-tag">TypeScript</span>
+                    <span class="card-tag">Node.js</span>
+                    <span class="card-tag">PostgreSQL</span>
                 </div>
-                <a href="https://github.com/rabensour/portfolio/tree/main/projects/sports-analyser" class="project-code-btn" target="_blank">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-                    View Code
-                </a>
             </div>
 
-            <!-- Torah Study -->
-            <div class="project">
-                <div class="project-number">17</div>
-                <h3 class="project-title">📖 Torah Study App</h3>
-                <p class="project-subtitle">Full-Stack Jewish Learning Platform</p>
-                <p class="project-description">
-                    Full-stack application for Torah study — texts, commentaries, search and personalized learning tracking. Built with React frontend and Node.js backend.
-                </p>
-                <div class="features">
-                    <h4>Key Features:</h4>
-                    <ul>
-                        <li>Torah texts & commentaries</li>
-                        <li>Advanced search engine</li>
-                        <li>Personal learning tracker</li>
-                        <li>Full-stack (React + Node.js)</li>
-                    </ul>
+            <!-- 18. Task Manager -->
+            <div class="project-card reveal" data-category="web" style="transition-delay:0.1s">
+                <div class="card-header">
+                    <span class="card-icon">📝</span>
+                    <a href="https://github.com/rabensour/portfolio/tree/main/projects/portfolio/01-TaskManager-FullStack" class="card-code-link" target="_blank" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> View Code →</a>
                 </div>
-                <div class="tech-tags">
-                    <span class="tech-tag">React</span>
-                    <span class="tech-tag">TypeScript</span>
-                    <span class="tech-tag">Node.js</span>
-                    <span class="tech-tag">PostgreSQL</span>
+                <div class="card-category">Full-Stack</div>
+                <h3 class="card-title">Task Manager Full Stack</h3>
+                <p class="card-desc">Full-stack task management app with JWT auth, real-time updates, and team collaboration. React + Express + MongoDB.</p>
+                <div class="card-tags">
+                    <span class="card-tag">React</span>
+                    <span class="card-tag">Node.js</span>
+                    <span class="card-tag">MongoDB</span>
+                    <span class="card-tag">JWT</span>
                 </div>
-                <a href="https://github.com/rabensour/portfolio/tree/main/projects/torah-study" class="project-code-btn" target="_blank">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-                    View Code
-                </a>
             </div>
 
-            <!-- Task Manager Full Stack -->
-            <div class="project">
-                <div class="project-number">18</div>
-                <h3 class="project-title">📝 Task Manager Full Stack</h3>
-                <p class="project-subtitle">Complete Task Management App</p>
-                <p class="project-description">
-                    Full-stack task management application with authentication, real-time updates and team collaboration. React frontend with Node.js/Express backend and MongoDB.
-                </p>
-                <div class="features">
-                    <h4>Key Features:</h4>
-                    <ul>
-                        <li>JWT authentication system</li>
-                        <li>Real-time task updates</li>
-                        <li>User & team management</li>
-                        <li>REST API with Express</li>
-                    </ul>
+            <!-- 19. Analytics Dashboard -->
+            <div class="project-card reveal" data-category="web">
+                <div class="card-header">
+                    <span class="card-icon">📊</span>
+                    <a href="https://github.com/rabensour/portfolio/tree/main/projects/portfolio/02-Analytics-Dashboard" class="card-code-link" target="_blank" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> View Code →</a>
                 </div>
-                <div class="tech-tags">
-                    <span class="tech-tag">React</span>
-                    <span class="tech-tag">Node.js</span>
-                    <span class="tech-tag">MongoDB</span>
-                    <span class="tech-tag">Express</span>
-                    <span class="tech-tag">JWT</span>
+                <div class="card-category">Full-Stack</div>
+                <h3 class="card-title">Analytics Dashboard</h3>
+                <p class="card-desc">Interactive analytics dashboard with Chart.js visualizations — line, bar and doughnut charts with real-time data simulation and responsive grid.</p>
+                <div class="card-tags">
+                    <span class="card-tag">React</span>
+                    <span class="card-tag">Chart.js</span>
+                    <span class="card-tag">CSS Grid</span>
                 </div>
-                <a href="https://github.com/rabensour/portfolio/tree/main/projects/portfolio/01-TaskManager-FullStack" class="project-code-btn" target="_blank">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-                    View Code
-                </a>
             </div>
 
-            <!-- Analytics Dashboard -->
-            <div class="project">
-                <div class="project-number">19</div>
-                <h3 class="project-title">📊 Analytics Dashboard</h3>
-                <p class="project-subtitle">Data Visualization Dashboard</p>
-                <p class="project-description">
-                    Interactive analytics dashboard with rich data visualizations. Line charts, bar charts and doughnut charts powered by Chart.js with mock data and responsive layout.
-                </p>
-                <div class="features">
-                    <h4>Key Features:</h4>
-                    <ul>
-                        <li>Multi-chart visualizations</li>
-                        <li>Real-time data simulation</li>
-                        <li>Responsive grid layout</li>
-                        <li>Interactive stat cards</li>
-                    </ul>
+            <!-- 20. E-commerce API -->
+            <div class="project-card reveal" data-category="web" style="transition-delay:0.05s">
+                <div class="card-header">
+                    <span class="card-icon">🛒</span>
+                    <a href="https://github.com/rabensour/portfolio/tree/main/projects/portfolio/03-Ecommerce-API" class="card-code-link" target="_blank" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> View Code →</a>
                 </div>
-                <div class="tech-tags">
-                    <span class="tech-tag">React</span>
-                    <span class="tech-tag">Chart.js</span>
-                    <span class="tech-tag">JavaScript</span>
-                    <span class="tech-tag">CSS Grid</span>
+                <div class="card-category">Full-Stack · Backend</div>
+                <h3 class="card-title">E-commerce API</h3>
+                <p class="card-desc">Production-ready e-commerce REST API with products, cart, orders, JWT auth, and admin routes. Full CRUD with MongoDB.</p>
+                <div class="card-tags">
+                    <span class="card-tag">Node.js</span>
+                    <span class="card-tag">Express</span>
+                    <span class="card-tag">MongoDB</span>
+                    <span class="card-tag">JWT</span>
                 </div>
-                <a href="https://github.com/rabensour/portfolio/tree/main/projects/portfolio/02-Analytics-Dashboard" class="project-code-btn" target="_blank">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-                    View Code
-                </a>
             </div>
 
-            <!-- E-commerce API -->
-            <div class="project">
-                <div class="project-number">20</div>
-                <h3 class="project-title">🛒 E-commerce API</h3>
-                <p class="project-subtitle">Complete REST API for E-commerce</p>
-                <p class="project-description">
-                    Full-featured e-commerce REST API with products, cart, orders and payments. Includes admin routes, JWT auth, and full CRUD operations for a production-ready backend.
-                </p>
-                <div class="features">
-                    <h4>Key Features:</h4>
-                    <ul>
-                        <li>Products, cart & orders CRUD</li>
-                        <li>JWT + admin authentication</li>
-                        <li>Payment integration ready</li>
-                        <li>Full REST API documentation</li>
-                    </ul>
+            <!-- 21. Sentiment Analysis -->
+            <div class="project-card reveal" data-category="ai" style="transition-delay:0.1s">
+                <div class="card-header">
+                    <span class="card-icon">🎭</span>
+                    <a href="https://github.com/rabensour/portfolio/tree/main/projects/portfolio/05-Sentiment-Analysis-AI" class="card-code-link" target="_blank" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> View Code →</a>
                 </div>
-                <div class="tech-tags">
-                    <span class="tech-tag">Node.js</span>
-                    <span class="tech-tag">Express</span>
-                    <span class="tech-tag">MongoDB</span>
-                    <span class="tech-tag">JWT</span>
-                    <span class="tech-tag">REST API</span>
+                <div class="card-category">AI &amp; ML</div>
+                <h3 class="card-title">Sentiment Analysis AI</h3>
+                <p class="card-desc">Classifies text as positive, negative or neutral with confidence scores. Flask web interface for real-time NLP sentiment analysis.</p>
+                <div class="card-tags">
+                    <span class="card-tag">Python</span>
+                    <span class="card-tag">Flask</span>
+                    <span class="card-tag">NLP</span>
+                    <span class="card-tag">ML</span>
                 </div>
-                <a href="https://github.com/rabensour/portfolio/tree/main/projects/portfolio/03-Ecommerce-API" class="project-code-btn" target="_blank">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-                    View Code
-                </a>
             </div>
 
-            <!-- Sentiment Analysis AI -->
-            <div class="project">
-                <div class="project-number">21</div>
-                <h3 class="project-title">🎭 Sentiment Analysis AI</h3>
-                <p class="project-subtitle">NLP Sentiment Classification</p>
-                <p class="project-description">
-                    AI-powered sentiment analysis tool that classifies text as positive, negative or neutral. Built with Python and a Flask web interface for real-time analysis.
-                </p>
-                <div class="features">
-                    <h4>Key Features:</h4>
-                    <ul>
-                        <li>Real-time sentiment classification</li>
-                        <li>Confidence score per prediction</li>
-                        <li>Flask web interface</li>
-                        <li>REST API endpoint</li>
-                    </ul>
+            <!-- 22. AI Chatbot -->
+            <div class="project-card reveal" data-category="ai">
+                <div class="card-header">
+                    <span class="card-icon">🤖</span>
+                    <a href="https://github.com/rabensour/portfolio/tree/main/projects/portfolio/06-AI-Chatbot" class="card-code-link" target="_blank" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> View Code →</a>
                 </div>
-                <div class="tech-tags">
-                    <span class="tech-tag">Python</span>
-                    <span class="tech-tag">Flask</span>
-                    <span class="tech-tag">NLP</span>
-                    <span class="tech-tag">Machine Learning</span>
+                <div class="card-category">AI &amp; ML</div>
+                <h3 class="card-title">AI Chatbot</h3>
+                <p class="card-desc">Smart conversational assistant with OpenAI integration, conversation memory and context-aware responses. Clean real-time chat interface.</p>
+                <div class="card-tags">
+                    <span class="card-tag">Python</span>
+                    <span class="card-tag">Flask</span>
+                    <span class="card-tag">OpenAI</span>
                 </div>
-                <a href="https://github.com/rabensour/portfolio/tree/main/projects/portfolio/05-Sentiment-Analysis-AI" class="project-code-btn" target="_blank">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-                    View Code
-                </a>
             </div>
 
-            <!-- AI Chatbot -->
-            <div class="project">
-                <div class="project-number">22</div>
-                <h3 class="project-title">🤖 AI Chatbot</h3>
-                <p class="project-subtitle">Intelligent Conversational Assistant</p>
-                <p class="project-description">
-                    Smart chatbot with OpenAI integration, conversation memory and context-aware responses. Flask backend with a clean, real-time chat interface.
-                </p>
-                <div class="features">
-                    <h4>Key Features:</h4>
-                    <ul>
-                        <li>OpenAI GPT integration</li>
-                        <li>Conversation history & memory</li>
-                        <li>Real-time chat interface</li>
-                        <li>Context-aware responses</li>
-                    </ul>
+            <!-- 23. Social Media MERN -->
+            <div class="project-card reveal" data-category="web" style="transition-delay:0.05s">
+                <div class="card-header">
+                    <span class="card-icon">📱</span>
+                    <a href="https://github.com/rabensour/portfolio/tree/main/projects/portfolio/07-Social-Media-MERN" class="card-code-link" target="_blank" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> View Code →</a>
                 </div>
-                <div class="tech-tags">
-                    <span class="tech-tag">Python</span>
-                    <span class="tech-tag">Flask</span>
-                    <span class="tech-tag">OpenAI</span>
-                    <span class="tech-tag">JavaScript</span>
+                <div class="card-category">Full-Stack</div>
+                <h3 class="card-title">Social Media MERN</h3>
+                <p class="card-desc">Full-stack social network on the MERN stack. User profiles, posts, likes, comments, JWT auth, and a real-time activity feed.</p>
+                <div class="card-tags">
+                    <span class="card-tag">MongoDB</span>
+                    <span class="card-tag">Express</span>
+                    <span class="card-tag">React</span>
+                    <span class="card-tag">Node.js</span>
                 </div>
-                <a href="https://github.com/rabensour/portfolio/tree/main/projects/portfolio/06-AI-Chatbot" class="project-code-btn" target="_blank">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-                    View Code
-                </a>
-            </div>
-
-            <!-- Social Media MERN -->
-            <div class="project">
-                <div class="project-number">23</div>
-                <h3 class="project-title">📱 Social Media MERN</h3>
-                <p class="project-subtitle">Full-Stack Social Network</p>
-                <p class="project-description">
-                    Full-stack social media app built on the MERN stack. Features posts, user profiles, authentication and a real-time feed with likes and comments.
-                </p>
-                <div class="features">
-                    <h4>Key Features:</h4>
-                    <ul>
-                        <li>User profiles & authentication</li>
-                        <li>Posts, likes & comments</li>
-                        <li>Real-time activity feed</li>
-                        <li>Full MERN stack</li>
-                    </ul>
-                </div>
-                <div class="tech-tags">
-                    <span class="tech-tag">MongoDB</span>
-                    <span class="tech-tag">Express</span>
-                    <span class="tech-tag">React</span>
-                    <span class="tech-tag">Node.js</span>
-                </div>
-                <a href="https://github.com/rabensour/portfolio/tree/main/projects/portfolio/07-Social-Media-MERN" class="project-code-btn" target="_blank">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-                    View Code
-                </a>
             </div>
 
         </div>
+    </div>
+</section>
 
-        <div class="contact">
-            <h2>💼 Let's Work Together</h2>
-            <p class="contact-info">
-                Passionate about AI and modern web development, I create intelligent solutions
-                that combine cutting-edge technologies with thoughtful design.
+<!-- CONTACT -->
+<section id="contact">
+    <div class="container">
+        <div class="contact-inner">
+            <div class="reveal">
+                <p class="section-label">Contact</p>
+                <h2 class="section-title">Let's build together</h2>
+                <div class="section-divider" style="margin: 0 auto 44px"></div>
+            </div>
+            <p class="contact-desc reveal" style="transition-delay:0.1s">
+                Passionate about AI and modern web development. Available for freelance missions,
+                collaborations, or just a good tech conversation.
             </p>
-            <div class="contact-links">
-                <a href="mailto:shayaben21@gmail.com" class="contact-btn">
-                    📧 Contact Me
+            <div class="contact-links reveal" style="transition-delay:0.2s">
+                <a href="mailto:shayaben21@gmail.com" class="contact-link">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    Email
                 </a>
-                <a href="https://github.com/rabensour" class="contact-btn" target="_blank">
-                    💻 GitHub Profile
+                <a href="https://github.com/rabensour/portfolio/tree/main/projects" class="contact-link" target="_blank">
+                    <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+                    GitHub
                 </a>
-                <a href="https://www.linkedin.com/in/raphaelabensour/" class="contact-btn" target="_blank">
-                    💼 LinkedIn
+                <a href="https://www.linkedin.com/in/raphaelabensour/" class="contact-link" target="_blank">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                    LinkedIn
                 </a>
             </div>
         </div>
     </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <p class="footer-text">
+        Designed &amp; built by <span>Raphaël Abensour</span> · 2025
+    </p>
+</footer>
+
+<!-- Back to top -->
+<button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <polyline points="18 15 12 9 6 15"/>
+    </svg>
+</button>
+
+<script>
+    // Nav scroll effect
+    const navbar = document.getElementById('navbar');
+    const backTop = document.getElementById('back-top');
+    window.addEventListener('scroll', () => {
+        navbar.classList.toggle('scrolled', window.scrollY > 20);
+        backTop.classList.toggle('visible', window.scrollY > 400);
+    });
+
+    // Mobile menu
+    function toggleMenu() {
+        document.getElementById('nav-links').classList.toggle('open');
+    }
+    document.querySelectorAll('#nav-links a').forEach(a => {
+        a.addEventListener('click', () => document.getElementById('nav-links').classList.remove('open'));
+    });
+
+    // Typewriter effect
+    const words = ['AI Solutions', 'Web Apps', 'RAG Pipelines', 'Smart Tools', 'Full-Stack Apps'];
+    let wi = 0, ci = 0, deleting = false;
+    const tw = document.getElementById('typewriter');
+
+    function type() {
+        const word = words[wi];
+        tw.textContent = deleting ? word.slice(0, ci--) : word.slice(0, ci++);
+        if (!deleting && ci > word.length) { deleting = true; setTimeout(type, 1600); return; }
+        if (deleting && ci < 0) { deleting = false; wi = (wi + 1) % words.length; ci = 0; }
+        setTimeout(type, deleting ? 55 : 95);
+    }
+    setTimeout(type, 1800);
+
+    // Scroll reveal
+    const revealObs = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+    // Counter animation
+    function animateCounter(el, target) {
+        let current = 0;
+        const isPercent = target === 100;
+        const step = target / 50;
+        const timer = setInterval(() => {
+            current = Math.min(current + step, target);
+            el.textContent = Math.round(current) + (isPercent ? '%' : '+');
+            if (current >= target) { el.textContent = target + (isPercent ? '%' : '+'); clearInterval(timer); }
+        }, 28);
+    }
+
+    const statsObs = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if (e.isIntersecting) {
+                animateCounter(e.target, parseInt(e.target.dataset.target));
+                statsObs.unobserve(e.target);
+            }
+        });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('.stat-number[data-target]').forEach(el => statsObs.observe(el));
+
+    // Project filter
+    document.querySelectorAll('.filter-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+            document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            const filter = tab.dataset.filter;
+            document.querySelectorAll('.project-card').forEach(card => {
+                const cats = card.dataset.category || '';
+                card.classList.toggle('hidden', filter !== 'all' && !cats.includes(filter));
+            });
+        });
+    });
+</script>
 </body>
 </html>
